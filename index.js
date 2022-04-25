@@ -5,6 +5,9 @@ slib(
     process.env.NODE_ENV !== "dev",
     {
         minify:false,
-        entries:["index.js"]
+        external:[
+            "@randajan/jet-core",
+            "@randajan/jet-base",
+        ]
     }
 )

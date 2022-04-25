@@ -1,8 +1,8 @@
 {
-  "name": "@randajan/jet-web",
+  "name": "@randajan/jet-react",
   "version": "1.0.0",
-  "description": "Tools for quick webdev",
-  "repository": "randajan/jet-core",
+  "description": "Tools for quick webdev with react",
+  "repository": "randajan/jet-react",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -14,7 +14,10 @@
     "build": "set NODE_ENV=prod&& node ./index.js"
   },
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "query-string": "^7.1.1",
+    "react-device-detect": "^2.2.2"
+  },
   "devDependencies": {
     "@randajan/simple-lib": "^1.2.1"
   },
@@ -37,6 +40,7 @@
     "url": "https://www.linkedin.com/in/randajan/"
   },
   "peerDependencies": {
-    "@randajan/jet-core": "^2.1.7"
+    "@randajan/jet-base": "1.2.3",
+    "@randajan/jet-core": "^3.0.3"
   }
 }

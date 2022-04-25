@@ -8,6 +8,11 @@ slib(
         external:[
             "@randajan/jet-core",
             "@randajan/jet-base",
-        ]
+            "react",
+            "react-dom"
+        ],
+        demo:{
+            loader:{".js":"jsx"}
+        }
     }
 )

@@ -1,0 +1,7 @@
+#test {
+    background-color:orange; width:5em; height:5em; margin:0; padding:0; position:absolute; transform: translate(-50%, -50%); border-radius:100%;
+    user-select:none;
+}
+#test:not([data-drift]) {
+  transition: .5s cubic-bezier(0.75, 0.01, 0.5, 1.75);
+}

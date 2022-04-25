@@ -127,7 +127,7 @@ export default jet.define("Element", Element, {
                 Element.jet.listen(ele, k, move, {pasive:false}),
                 autoPick ? Element.jet.listen(parent, k, move, {pasive:false}) : null,
             ]);
-    
+
             move();
             return _=>jet.run(cleanUp);
         },

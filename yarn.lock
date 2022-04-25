@@ -2,20 +2,20 @@
 # yarn lockfile v1
 
 
-"@randajan/jet-base@1.2.3":
+"@randajan/jet-base@^1.2.3":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@randajan/jet-base/-/jet-base-1.2.3.tgz#f704e54247161c6588540a7eae28bc9a0852a0e9"
   integrity sha512-oUMRIYwKzDrnv+44BS3b2Mol8gB/3Mc2rArFNlejqEd5ac4sC+wmpJbud318Rh+KFBwDr0vLsK8bajruJwlADA==
 
-"@randajan/jet-core@^3.0.3":
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-3.0.3.tgz#8a79f4dbae5843be91c7c80cc12843482d01b51e"
-  integrity sha512-+GcpnCZgDKhzOrUnCgFwrAu12sQ1TtXYz5c4yKiFe5+D/30jMGOSH4CFq81t77K8VCFk9zUgg+RO949ZZpgWnA==
+"@randajan/jet-core@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-3.0.4.tgz#858b3a60927b7580d620b9d95d26de7190f77bac"
+  integrity sha512-4aKUGTTdO6WriktO2UN8+KBDDFlygeQZ1nE+MLgjIfS0bI3Qc3fGztpudkUOmruIVBxfQfcvvJmWFOGHI56Deg==
 
-"@randajan/simple-lib@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@randajan/simple-lib/-/simple-lib-1.2.1.tgz#f136426ec4e625b043873ae9c5a615d22634a5c0"
-  integrity sha512-zPgAU+d631DoQ+2k+GA7QWGvHu8x6qr/qsOFxqN9UxG676dPbLUaKtiVmY+2ErlfUe6oNbiEEnWOVqeJS9GA4w==
+"@randajan/simple-lib@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@randajan/simple-lib/-/simple-lib-2.0.0.tgz#ea5a116847cb5340d42e3cc76f0f433a9c52023d"
+  integrity sha512-ZhADTAjdu53yLBnLQ4o2ePJe2mfVSp8TS7rMCgC4iRNpcLe8dM+jS1Rlm0f/DN/exebepkyRALLQgG7/hkeQ2w==
   dependencies:
     chokidar "^3.5.3"
     esbuild "^0.14.36"
@@ -858,6 +858,11 @@ isobject@^3.0.0, isobject@^3.0.1:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
 
+"js-tokens@^3.0.0 || ^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
+  integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
+
 jsonfile@^6.0.1:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-6.1.0.tgz#bc55b2634793c679ec6403094eb13698a6ec0aae"
@@ -909,6 +914,13 @@ live-server@^1.2.1:
     proxy-middleware latest
     send latest
     serve-index "^1.9.1"
+
+loose-envify@^1.1.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
+  integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
+  dependencies:
+    js-tokens "^3.0.0 || ^4.0.0"
 
 map-cache@^0.2.2:
   version "0.2.2"
@@ -1154,6 +1166,21 @@ react-device-detect@^2.2.2:
   dependencies:
     ua-parser-js "^1.0.2"
 
+react-dom@^18.0.0:
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.0.0.tgz#26b88534f8f1dbb80853e1eabe752f24100d8023"
+  integrity sha512-XqX7uzmFo0pUceWFCt7Gff6IyIMzFUn7QMZrbrQfGxtaxXZIcGQzoNpRLE3fQLnS4XzLLPMZX2T9TRcSrasicw==
+  dependencies:
+    loose-envify "^1.1.0"
+    scheduler "^0.21.0"
+
+react@^18.0.0:
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-18.0.0.tgz#b468736d1f4a5891f38585ba8e8fb29f91c3cb96"
+  integrity sha512-x+VL6wbT4JRVPm7EGxXhZ8w8LTROaxPXOqhlGyVSrv0sB1jkyFGgXxJ8LVoPRLvPR6/CIZGFmfzqUa2NYeMr2A==
+  dependencies:
+    loose-envify "^1.1.0"
+
 readable-stream@^2.0.2:
   version "2.3.7"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.7.tgz#1eca1cf711aef814c04f62252a36a62f6cb23b57"
@@ -1232,6 +1259,13 @@ safe-regex@^1.1.0:
   integrity sha1-QKNmnzsHfR6UPURinhV91IAjvy4=
   dependencies:
     ret "~0.1.10"
+
+scheduler@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.21.0.tgz#6fd2532ff5a6d877b6edb12f00d8ab7e8f308820"
+  integrity sha512-1r87x5fz9MXqswA2ERLo0EbOAU74DpIUO090gIasYTqlVoJeMcl+Z1Rg7WHz+qtPujhS/hGIt9kxZOYBV3faRQ==
+  dependencies:
+    loose-envify "^1.1.0"
 
 send@latest:
   version "0.18.0"

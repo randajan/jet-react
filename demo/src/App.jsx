@@ -1,6 +1,18 @@
-import React from "react";
-import { page, useDrag } from "../../dist/index.js";
+import React, { Component } from "react";
+import { page, useDrag, ReactComponent } from "../../dist/index.js";
 import "./test.css";
+
+import jet from "@randajan/jet-core";
+
+const TestInject = (props) => {
+
+    return ReactComponent.jet.inject(
+      props.children, (ele, key, level)=>{
+        return {children:key+":"+level, id:"li-"+key+"-"+level}
+      },
+      true, ["li"]
+    );
+  }
 
 export default _=>{
     const searchChanges = page.use("search");
@@ -20,9 +32,25 @@ export default _=>{
         appendState:true
     });
 
+    
+
     return (
-        <div id="wrap">
-            <div id="test" ref={ref}>{searchChanges().join(" | ")}</div>
+        <div className="App" data-flags={ReactComponent.jet.flags({test:true})}>
+            <TestInject>
+                <ul>
+                    <li/>
+                    <li/>
+                    <li/>
+                    <li/>
+                    <li/>
+                    <li/>
+                    <li/>
+                    <li/>
+                </ul>
+            </TestInject>
+            <div className="wrap">
+                <div id="test" ref={ref}>{searchChanges().join(" | ")}</div>
+            </div>
         </div>
     )
 }

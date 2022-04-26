@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@randajan/jet-base/-/jet-base-1.2.3.tgz#f704e54247161c6588540a7eae28bc9a0852a0e9"
   integrity sha512-oUMRIYwKzDrnv+44BS3b2Mol8gB/3Mc2rArFNlejqEd5ac4sC+wmpJbud318Rh+KFBwDr0vLsK8bajruJwlADA==
 
-"@randajan/jet-core@^3.0.4":
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-3.0.4.tgz#858b3a60927b7580d620b9d95d26de7190f77bac"
-  integrity sha512-4aKUGTTdO6WriktO2UN8+KBDDFlygeQZ1nE+MLgjIfS0bI3Qc3fGztpudkUOmruIVBxfQfcvvJmWFOGHI56Deg==
+"@randajan/jet-core@^3.0.5":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-3.0.5.tgz#a58dd01c1772a7268add3375ef992d91445515bc"
+  integrity sha512-l+afsXu0fCMowMH+MGoT+qtJHC0sElZ3LCewdQNHz6ZiJOpeVQuZ+qzIY5dv+4g7rpVy1P2USqSvSfIS4K8Fuw==
 
 "@randajan/simple-lib@2.0.0":
   version "2.0.0"
@@ -1159,13 +1159,6 @@ range-parser@~1.2.1:
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
 
-react-device-detect@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/react-device-detect/-/react-device-detect-2.2.2.tgz#dbabbce798ec359c83f574c3edb24cf1cca641a5"
-  integrity sha512-zSN1gIAztUekp5qUT/ybHwQ9fmOqVT1psxpSlTn1pe0CO+fnJHKRLOWWac5nKxOxvOpD/w84hk1I+EydrJp7SA==
-  dependencies:
-    ua-parser-js "^1.0.2"
-
 react-dom@^18.0.0:
   version "18.0.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.0.0.tgz#26b88534f8f1dbb80853e1eabe752f24100d8023"
@@ -1467,11 +1460,6 @@ toidentifier@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.1.tgz#3be34321a88a820ed1bd80dfaa33e479fbb8dd35"
   integrity sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==
-
-ua-parser-js@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-1.0.2.tgz#e2976c34dbfb30b15d2c300b2a53eac87c57a775"
-  integrity sha512-00y/AXhx0/SsnI51fTc0rLRmafiGOM4/O+ny10Ps7f+j/b8p/ZY11ytMgznXkOVo4GQ+KwQG5UQLkLGirsACRg==
 
 union-value@^1.0.0:
   version "1.0.1"

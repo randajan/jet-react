@@ -1,6 +1,5 @@
 import slib from "@randajan/simple-lib";
 
-
 slib(
     process.env.NODE_ENV !== "dev",
     {
@@ -12,7 +11,8 @@ slib(
             "react-dom"
         ],
         demo:{
-            loader:{".js":"jsx"}
+            loader:{".js":"jsx"},
+            plugins:[]
         }
     }
 )

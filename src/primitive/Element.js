@@ -12,7 +12,7 @@ const DRAG = {
 
 
 export default jet.define("Element", Element, {
-    create:x=>document.createElement(String.jet.to(x) || "div"),
+    create:(x, ...args)=>document.createElement(String.jet.to(x) || "div", ...args),
     to:x=>x.outerHTML,
     extendConstructor:{
         find:(query, all=false)=>all ? document.querySelectorAll(query) : document.querySelector(query),

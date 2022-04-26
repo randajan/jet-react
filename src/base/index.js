@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import page from "./page.js";
 import screen from "./screen.js";
-import client from "./client.js";
+//import client from "./client.js";
 
 
 Base.prototype.use = function(path) {
@@ -15,5 +15,5 @@ Base.prototype.use = function(path) {
 export {
     page,
     screen,
-    client
+    //client
 }

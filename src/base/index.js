@@ -1,12 +1,17 @@
-import Base from "@randajan/jet-base";
+import { BaseSync, BaseAsync } from "@randajan/jet-base";
 import { useEffect, useState } from "react";
 
 import page from "./page.js";
 import screen from "./screen.js";
-//import client from "./client.js";
 
 
-Base.prototype.use = function(path) {
+BaseSync.prototype.use = function (path) {
+    const [[getChanges], setGetChanges] = useState([_=>[]]);
+    useEffect(_=>this.watch(path, (get, cngs)=>setGetChanges([cngs])), [path]);
+    return getChanges;
+}
+
+BaseAsync.prototype.use = function (path) {
     const [[getChanges], setGetChanges] = useState([_=>[]]);
     useEffect(_=>this.watch(path, (get, cngs)=>setGetChanges([cngs])), [path]);
     return getChanges;
@@ -14,6 +19,5 @@ Base.prototype.use = function(path) {
 
 export {
     page,
-    screen,
-    //client
+    screen
 }

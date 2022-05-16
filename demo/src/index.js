@@ -9,8 +9,8 @@ import "./index.css";
 createRoot(Element.jet.find("#root")).render(<App />);
 
 window.jet = jet;
-window.basePage = page;
-window.baseScreen = screen;
+window.basePage = page.config(true);
+window.baseScreen = screen.config({}, true);
 
 
 

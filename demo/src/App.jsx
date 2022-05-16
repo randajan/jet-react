@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { page, useDrag, ReactComponent } from "../../dist/index.js";
+import { page, screen, useDrag, ReactComponent } from "../../dist/index.js";
 import "./test.css";
 
 import jet from "@randajan/jet-core";
@@ -16,6 +16,7 @@ const TestInject = (props) => {
 
 export default _=>{
     const searchChanges = page.use("search");
+    //const screenChanges = screen.use();
 
     const [ ref, move ] = useDrag((bound)=>{
         //console.log(bound.x, bound.y); 
@@ -35,7 +36,7 @@ export default _=>{
     
 
     return (
-        <div className="App" data-flags={ReactComponent.jet.flags({test:true})}>
+        <div className="App" data-flags={ReactComponent.jet.flags(_=>_, "a")}>
             <TestInject>
                 <ul>
                     <li/>

@@ -18,11 +18,7 @@
     "query-string": "^7.1.1"
   },
   "devDependencies": {
-    "@randajan/jet-base": "^1.2.3",
-    "@randajan/jet-core": "^3.0.5",
-    "@randajan/simple-lib": "2.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "@randajan/simple-lib": "2.0.0"
   },
   "files": [
     "dist",
@@ -43,9 +39,9 @@
     "url": "https://www.linkedin.com/in/randajan/"
   },
   "peerDependencies": {
-    "@randajan/jet-base": "^1.2.3",
-    "@randajan/jet-core": "^3.0.4",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "@randajan/jet-base": "^2.0.4",
+    "@randajan/jet-core": "^3.0.8",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
   }
 }

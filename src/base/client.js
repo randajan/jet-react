@@ -23,4 +23,5 @@ class Client extends Base {
 }
 
 
-export default new Client();
+let instance;
+export default (debug)=>instance || (instance = new Client(debug));

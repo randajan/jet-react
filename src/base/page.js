@@ -1,7 +1,7 @@
 import qs from "query-string";
 
 import jet from "@randajan/jet-core";
-import { BaseSync } from "@randajan/jet-base";
+import BaseSync from "@randajan/jet-base/sync";
 
 const parseQuery = (query, startChar="?")=>{
     if (Object.jet.is(query)) { return query; }
@@ -15,10 +15,10 @@ const buildQuery = query=>{
     return String.jet.to(query);
 }
 
-class Page extends BaseSync {
+export default class Page extends BaseSync {
 
     constructor() {
-        super((base, options)=>{
+        super((base)=>{
 
             const loc = window.location;
             const his = window.history;
@@ -85,5 +85,3 @@ class Page extends BaseSync {
     }
 
 }
-
-export default new Page();

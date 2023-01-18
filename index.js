@@ -3,7 +3,11 @@ import slib from "@randajan/simple-lib";
 slib(
     process.env.NODE_ENV !== "dev",
     {
-        minify:false,
+        entries:[
+            "index.js",
+            "page.js",
+            "screen.js"
+        ],
         external:[
             "@randajan/jet-core",
             "@randajan/jet-base",

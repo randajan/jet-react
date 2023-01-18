@@ -1,19 +1,19 @@
-import { BaseSync } from "@randajan/jet-base";
+import BaseSync from "@randajan/jet-base/sync";
 
-const def = {
+const _def = {
     width:[600, 960, 1280, 1920],
     height:[300, 600, 920, 1280]
 }
 
-class Screen extends BaseSync {
+export default class Screen extends BaseSync {
 
     constructor() {
 
         super((base, { widths, heights })=>{
     
             const check = {
-                width:Array.jet.tap(widths, def.width).sort((a,b)=>a-b),
-                height:Array.jet.tap(heights, def.height).sort((a,b)=>a-b)
+                width:Array.jet.tap(widths, _def.width).sort((a,b)=>a-b),
+                height:Array.jet.tap(heights, _def.height).sort((a,b)=>a-b)
             }    
     
             window.addEventListener("resize", _=>base.set());
@@ -44,5 +44,3 @@ class Screen extends BaseSync {
     }
 
 }
-
-export default new Screen();

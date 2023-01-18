@@ -7,7 +7,9 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.js",
+    "./page": "./dist/page.js",
+    "./screen": "./dist/screen.js"
   },
   "scripts": {
     "start": "set NODE_ENV=dev&& node ./index.js",
@@ -18,7 +20,11 @@
     "query-string": "^7.1.1"
   },
   "devDependencies": {
-    "@randajan/simple-lib": "2.0.0"
+    "@randajan/jet-base": "^2.1.2",
+    "@randajan/jet-core": "^3.0.11",
+    "@randajan/simple-lib": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "files": [
     "dist",
@@ -37,11 +43,5 @@
     "name": "Jan Randa",
     "email": "jnranda@gmail.com",
     "url": "https://www.linkedin.com/in/randajan/"
-  },
-  "peerDependencies": {
-    "@randajan/jet-base": "^2.0.4",
-    "@randajan/jet-core": "^3.0.8",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0"
   }
 }

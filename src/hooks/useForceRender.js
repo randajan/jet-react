@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const PRIVATE = []
+const PRIVATE = [];
 
 export const useForceRender = _=>{
   const render = useState()[1];

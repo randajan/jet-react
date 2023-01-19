@@ -7,7 +7,8 @@ const DRAG = {
     bounds:[ 
         "state", "left", "right", "top", "bottom", "width", "height", "parent",
         "pickX", "pickY", "startX", "startY", "lastX", "lastY"
-    ]
+    ],
+    ignored:[ "move>start", "stop>move", "stop>stop"]
 }
 
 
@@ -72,14 +73,15 @@ export default jet.define("Element", Element, {
                 dist:{enumerable, get:_=>Math.sqrt(Math.pow(bound.distX, 2)+Math.pow(bound.distY, 2))},
                 dirX:{enumerable, get:_=>bound.distX > 0 ? "right" : "left" },
                 dirY:{enumerable, get:_=>bound.distY > 0 ? "down" : "up"},
-                dir:{enumerable, get:_=>Math.abs(bound.distX) > Math.abs(bound.distY) ? bound.dirX : bound.dirY}
+                dir:{enumerable, get:_=>Math.abs(bound.distX) > Math.abs(bound.distY) ? bound.dirX : bound.dirY},
+                stop:{value:(delay=0)=>setTimeout(_=>exe("stop"), delay)}
             }); 
     
             DRAG.bounds.map(k=>Object.defineProperty(bound, k, {enumerable, get:_=>_b[k]}));
-    
-            function move(ev) {
-                if (!parent) { return; }
-                const state = ev ? DRAG.evmap[ev.type] : "init";
+
+            const exe = (state, ev)=>{
+                if (DRAG.ignored.includes(_b?.state+">"+state)) { return; }
+
                 const init = (state === "start" || state === "init");
     
                 if (init) { 
@@ -122,13 +124,15 @@ export default jet.define("Element", Element, {
 
                 _b.prevX = _b.x; _b.prevY = _b.y;
             };
+
+            const move = ev=>exe(DRAG.evmap[ev.type] || "stop", ev);
     
             const cleanUp = ["mousedown", "touchstart"].map(k=>[
                 Element.jet.listen(ele, k, move, {pasive:false}),
                 autoPick ? Element.jet.listen(parent, k, move, {pasive:false}) : null,
             ]);
 
-            move();
+            if (parent) { exe("init"); }
             return _=>jet.run(cleanUp);
         },
         drag(ele, onShift, opt={}) {

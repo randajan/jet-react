@@ -23,6 +23,7 @@ export default _=>{
     const [ ref, move ] = useDrag((bound)=>{
         bound.relX = Number.jet.snap(bound.relX, .025, 0.25, .75);
         bound.relY = Number.jet.snap(bound.relY, .025, 0.25, .75);
+        if (bound.dist > 200) { bound.stop(); }
     }, {
         initX:page.get("search.x"),
         initY:page.get("search.y"),

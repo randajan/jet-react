@@ -8,8 +8,11 @@ import ReactComponent from "./primitive/ReactComponent.js";
 import { useForceRender } from "./hooks/useForceRender.js";
 import { useFocus } from "./hooks/useFocus.js";
 import { useDrift, useDrag, useSwipe } from "./hooks/useDrift.js";
+import { usePromise } from "./hooks/usePromise.js";
 
 import "./hooks/useBase";
+
+
 
 export default jet;
 export {
@@ -18,6 +21,7 @@ export {
     ReactComponent,
     ReactElement,
     useForceRender,
+    usePromise,
     useFocus,
     useDrift,
     useDrag,

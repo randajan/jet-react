@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 
-export default function usePromise(init, pull, deps=[]) {
+export const usePromise = (init, pull, deps=[])=>{
     const [data, setData] = useState(init);
 
     const pullAndSet = useCallback(async _ => { if (pull) { setData(await pull()); } }, deps||[]);

@@ -8,12 +8,14 @@ slib(
             "page.js",
             "screen.js"
         ],
-        external:[
-            "@randajan/jet-core",
-            "@randajan/jet-base",
-            "react",
-            "react-dom"
-        ],
+        lib:{
+            external:[
+                "@randajan/jet-core",
+                "@randajan/jet-base",
+                "react",
+                "react-dom"
+            ],
+        },
         demo:{
             loader:{".js":"jsx"},
             plugins:[]

@@ -18,19 +18,19 @@ const TestInject = (props) => {
 
 export default _=>{
     const searchChanges = page.use("search");
-    const screenChanges = screen.use("300h");
+    const screenChanges = screen.use();
 
     const [ ref, move ] = useDrag((bound)=>{
-        bound.relX = Number.jet.snap(bound.relX, .025, 0.25, .75);
-        bound.relY = Number.jet.snap(bound.relY, .025, 0.25, .75);
-        if (bound.dist > 200) { bound.stop(); }
+        //bound.relX = Number.jet.snap(bound.relX, .025, 0.25, 1);
+        //if (bound.dir === "up") { bound.relY = Number.jet.snap(bound.relY, .1, 0.25, .75);}
+        if (bound.dist > 300) { bound.stop(); }
     }, {
         initX:page.get("search.x"),
         initY:page.get("search.y"),
         up:.5,
-        left:.05,
-        right:.05,
-        down:.01,
+        left:.005,
+        right:.005,
+        down:.005,
         autoReset:true,
         appendState:true
     });

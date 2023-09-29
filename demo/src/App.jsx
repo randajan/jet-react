@@ -17,16 +17,16 @@ const TestInject = (props) => {
   }
 
 export default _=>{
-    const searchChanges = page.use("search");
-    const screenChanges = screen.use();
+    const [ pageSearch, searchChanges ] = page.use("search");
+    const [ screenSugar, screenChanges ] = screen.use();
 
     const [ ref, move ] = useDrag((bound)=>{
         //bound.relX = Number.jet.snap(bound.relX, .025, 0.25, 1);
         //if (bound.dir === "up") { bound.relY = Number.jet.snap(bound.relY, .1, 0.25, .75);}
         if (bound.dist > 300) { bound.stop(); }
     }, {
-        initX:page.get("search.x"),
-        initY:page.get("search.y"),
+        initX:pageSearch.get("x"),
+        initY:pageSearch.get("y"),
         up:.5,
         left:.005,
         right:.005,

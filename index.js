@@ -9,6 +9,7 @@ slib(
             "screen.js"
         ],
         lib:{
+            minify:false,
             external:[
                 "@randajan/jet-core",
                 "@randajan/jet-base",

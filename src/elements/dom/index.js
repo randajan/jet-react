@@ -1,10 +1,11 @@
 import { Link } from "./Link";
 import { Route } from "./Route";
-import { Router } from "./Router";
+import { Router, useRoute } from "./Router";
 
 
 export {
     Link,
     Route,
-    Router
+    Router,
+    useRoute
 }

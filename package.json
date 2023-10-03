@@ -1,6 +1,6 @@
 {
   "name": "@randajan/jet-react",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "Tools for quick webdev with react",
   "repository": "randajan/jet-react",
   "type": "module",

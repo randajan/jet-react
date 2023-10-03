@@ -10,7 +10,7 @@
     ".": "./dist/index.js",
     "./page": "./dist/base/page.js",
     "./screen": "./dist/base/screen.js",
-    "./router": "./dist/elements/Router.js"
+    "./dom": "./dist/elements/dom/index.js"
   },
   "scripts": {
     "start": "set NODE_ENV=dev&& node ./index.js",

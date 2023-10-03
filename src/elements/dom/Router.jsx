@@ -1,18 +1,10 @@
 import React, { Component, createContext, useContext } from 'react';
 import { match } from 'path-to-regexp';
-import page from "../base/page";
+import page from "../../base/page";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const context = createContext();
 let c = 0;
-
-export const Route = (props) => {
-    return (
-        <>
-            {props.children}
-        </>
-    )
-}
 
 export const Router = (props) => {
     const { children, transition, transitionPrefix } = props;

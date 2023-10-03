@@ -9,7 +9,7 @@ slib(
                 "./index.js",
                 "./base/page.js",
                 "./base/screen.js",
-                "./elements/Router.js"
+                "./elements/dom/index.js",
             ],
             loader:{
                 ".js":"jsx"

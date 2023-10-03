@@ -5,7 +5,7 @@ const _def = {
     height:[300, 600, 920, 1280]
 }
 
-export default class Screen extends BaseSync {
+class Screen extends BaseSync {
 
     constructor() {
 
@@ -44,3 +44,5 @@ export default class Screen extends BaseSync {
     }
 
 }
+
+export default new Screen();

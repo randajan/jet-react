@@ -3,19 +3,23 @@ import slib from "@randajan/simple-lib";
 slib(
     process.env.NODE_ENV !== "dev",
     {
-        entries:[
-            "index.js",
-            "page.js",
-            "screen.js"
-        ],
         lib:{
             minify:false,
-            external:[
-                "@randajan/jet-core",
-                "@randajan/jet-base",
-                "react",
-                "react-dom"
+            entries:[
+                "./index.js",
+                "./base/page.js",
+                "./base/screen.js",
+                "./elements/Router.js"
             ],
+            loader:{
+                ".js":"jsx"
+            },
+            // external:[
+            //     "@randajan/jet-core",
+            //     "@randajan/jet-base",
+            //     "react",
+            //     "react-dom"
+            // ],
         },
         demo:{
             loader:{".js":"jsx"},

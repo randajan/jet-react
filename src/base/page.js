@@ -15,7 +15,7 @@ const buildQuery = query=>{
     return String.jet.to(query);
 }
 
-export default class Page extends BaseSync {
+class Page extends BaseSync {
 
     constructor() {
         super((base)=>{
@@ -85,3 +85,5 @@ export default class Page extends BaseSync {
     }
 
 }
+
+export default new Page();

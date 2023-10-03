@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { useDrag, ReactComponent } from "../../dist/index.js";
-import page from "../../dist/page.js";
-import screen from "../../dist/screen.js";
+import page from "../../dist/base/page";
+import screen from "../../dist/base/screen";
 import "./test.css";
 
 import jet from "@randajan/jet-core";

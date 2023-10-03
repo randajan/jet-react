@@ -8,8 +8,9 @@
   "module": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",
-    "./page": "./dist/page.js",
-    "./screen": "./dist/screen.js"
+    "./page": "./dist/base/page.js",
+    "./screen": "./dist/base/screen.js",
+    "./router": "./dist/base/Router.js"
   },
   "scripts": {
     "start": "set NODE_ENV=dev&& node ./index.js",

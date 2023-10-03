@@ -40,4 +40,7 @@ export const Router = (props) => {
     )
 }
 
-export const useRoute = _=>useContext(context);
+export const useRoute = _=>{
+    const route = useContext(context);
+    return useState(_=>route)[0];
+}

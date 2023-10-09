@@ -45,7 +45,9 @@ export default jet.define("Element", Element, {
             return { width, height, left, top, right, bottom }
         },
         listen:(ele, type, handler, opt, append=true)=>{
-            ele = Element.jet.is(ele, false) ? ele : document;
+            if (ele !== window && ele !== document && !Element.jet.is(ele, false)) {
+                throw Error(`Element.jet.listen(...) expect window, document or instanceof element as first argument`);
+            }
             type = String.jet.to(type) || "click";
             handler = jet.isRunnable(handler) ? handler : Event.jet.cut;
             ele[(append ? "add" : "remove")+"EventListener"](type, handler, opt);

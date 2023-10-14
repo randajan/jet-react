@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { useDrag, ReactComponent } from "../../dist/index.js";
+import {  useDrag, ReactComponent } from "../../dist/index.js";
 import page from "../../dist/base/page";
 import screen from "../../dist/base/screen";
+import { Link } from "../../dist/elements/dom/index.js";
 import "./test.css";
 
 import jet from "@randajan/jet-core";
@@ -43,6 +44,7 @@ export default _=>{
                 <div id="test" ref={ref}/>
             </div>
             <div>{ReactComponent.jet.flags(screen.get(), "A").join(" | ")}</div>
+            <Link type="mail">731 732 737</Link>
             <TestInject>
                 <ul>
                     <li/>

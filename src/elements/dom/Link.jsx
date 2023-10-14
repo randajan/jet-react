@@ -41,7 +41,7 @@ export const Link = (props)=>{
 export const LinkTel = (props)=>{
     const prefix = props.telPrefix;
     const raw = String.jet.to(props.to || props.href || props.children);
-    console.log(raw);
+
     const simple = raw.replace(/[\s\n\r]+/g, "").replace(/^00/, "+");
 
     const passProps = {

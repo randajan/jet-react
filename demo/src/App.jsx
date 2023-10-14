@@ -44,7 +44,7 @@ export default _=>{
                 <div id="test" ref={ref}/>
             </div>
             <div>{ReactComponent.jet.flags(screen.get(), "A").join(" | ")}</div>
-            <Link type="mail">731 732 737</Link>
+            <Link to="?x=0.5&y=0.5">TO MIDDLE</Link>
             <TestInject>
                 <ul>
                     <li/>
@@ -58,8 +58,8 @@ export default _=>{
                 </ul>
             </TestInject>
             <div style={{visibility:move ? "hidden" : "visible"}}>
-                <input onChange={ev=>page.set("search.x", ev.target.value)} defaultValue={page.get("search.x") || 0}/>
-                <input onChange={ev=>page.set("search.y", ev.target.value)} defaultValue={page.get("search.y") || 0}/>
+                <input onChange={ev=>page.set("search.x", ev.target.value)} value={page.get("search.x") || 0}/>
+                <input onChange={ev=>page.set("search.y", ev.target.value)} value={page.get("search.y") || 0}/>
             </div>
 
         </div>

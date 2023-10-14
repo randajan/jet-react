@@ -5,23 +5,27 @@ import page from "../../base/page";
 
 const getPropsWeb = (props)=>{
     const { target, onClick } = props;
+    const current = page.get("href");
 
-    const url = new URL(props.to || props.href, page.get("href"));
+    const url = new URL(props.to || props.href, current);
     const isLocal = page.is("origin", url.origin);
     const isHard = target || !isLocal;
+    const isCurrent = !isHard && current === url.href;
 
     const passProps = {
-        className:jet.melt(["Link", isHard ? "hard" : "soft", props.className], " "),
+        className:jet.melt(["Link", props.className], " "),
         href:isLocal ? url.href.slice(url.origin.length) : url.href,
+        "data-flags":jet.melt([isHard ? "hard" : "soft", isCurrent ? "current" : ""], " ")
     }
 
     if (isHard) {
         passProps.rel = "noreferrer noopener";
         passProps.target = (target == null || target === true) ? "_blank" : target === false ? "_self" : target;
     }
-    else {
+    else{
         passProps.onClick = ev=>{
             ev?.preventDefault();
+            if (isCurrent) { return; }
             if (jet.isRunnable(onClick)) { onClick(ev); };
             page.set({ pathname:url.pathname, search:url.search, hash:url.hash });
         };
@@ -37,7 +41,8 @@ const getPropsTel = (props)=>{
     const simple = raw.replace(/[\s\n\r]+/g, "").replace(/^00/, "+");
 
     return {
-        className:jet.melt(["Link", "tel", props.className], " "),
+        className:jet.melt(["Link", props.className], " "),
+        "data-flags":"tel",
         href:"tel:" + (simple.startsWith("+") ? simple : (prefix || "+420") + simple),
         rel:"noreferrer noopener"
     }
@@ -48,12 +53,12 @@ const getPropsMail = (props)=>{
     const simple = raw.replace(/[\s\n\r]+/g, "");
 
     return {
-        className:jet.melt(["Link", "mail", props.className], " "),
+        className:jet.melt(["Link", props.className], " "),
+        "data-flags":"mail",
         href:"mailto:"+String.jet.delone(simple),
         rel:"noreferrer noopener"
     }
 }
-
 
 export const Link = (props)=>{
     const type = props.type;

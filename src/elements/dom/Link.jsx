@@ -3,14 +3,18 @@ import jet from "../../index.js";
 
 import page from "../../base/page";
 
-const getPropsWeb = (props)=>{
+const _excludeProps = ["to", "type", "target", "telPrefix"];
+
+export const Link = (props)=>{
+    page.use();
+
     const { target, onClick } = props;
     const current = page.get("href");
 
     const url = new URL(props.to || props.href, current);
     const isLocal = page.is("origin", url.origin);
     const isHard = target || !isLocal;
-    const isCurrent = !isHard && current === url.href;
+    const isCurrent = !isHard && url.href === current;
 
     const passProps = {
         className:jet.melt(["Link", props.className], " "),
@@ -31,39 +35,35 @@ const getPropsWeb = (props)=>{
         };
     }
 
-    return passProps;
+    return <a {...Component.jet.buildProps(props, passProps, _excludeProps)}/>
 }
 
-const getPropsTel = (props)=>{
+export const LinkTel = (props)=>{
     const prefix = props.telPrefix;
     const raw = String.jet.to(props.to || props.href || props.children);
     console.log(raw);
     const simple = raw.replace(/[\s\n\r]+/g, "").replace(/^00/, "+");
 
-    return {
+    const passProps = {
         className:jet.melt(["Link", props.className], " "),
         "data-flags":"tel",
         href:"tel:" + (simple.startsWith("+") ? simple : (prefix || "+420") + simple),
         rel:"noreferrer noopener"
     }
+
+    return <a {...Component.jet.buildProps(props, passProps, _excludeProps)}/>
 }
 
-const getPropsMail = (props)=>{
+export const LinkMail = (props)=>{
     const raw = String.jet.to(props.to || props.href || props.children);
     const simple = raw.replace(/[\s\n\r]+/g, "");
 
-    return {
+    const passProps = {
         className:jet.melt(["Link", props.className], " "),
         "data-flags":"mail",
         href:"mailto:"+String.jet.delone(simple),
         rel:"noreferrer noopener"
     }
-}
 
-export const Link = (props)=>{
-    const type = props.type;
-
-    const passProps = type === "tel" ? getPropsTel(props) : type === "mail" ? getPropsMail(props) : getPropsWeb(props);
-
-    return <a {...Component.jet.buildProps(props, passProps, ["to", "type", "target", "telPrefix"])}/>
+    return <a {...Component.jet.buildProps(props, passProps, _excludeProps)}/>
 }

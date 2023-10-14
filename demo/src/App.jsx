@@ -44,7 +44,7 @@ export default _=>{
                 <div id="test" ref={ref}/>
             </div>
             <div>{ReactComponent.jet.flags(screen.get(), "A").join(" | ")}</div>
-            <Link to="?x=0.5&y=0.5">TO MIDDLE</Link>
+            <Link to="#contact=up">TO MIDDLE</Link>
             <TestInject>
                 <ul>
                     <li/>

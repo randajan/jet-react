@@ -5,9 +5,9 @@ const useMove = (event, onMove, opt)=>{
   const [move, setMove] = useState(false);
   const ref = useRef();
 
-  useEffect(_=>Element.jet[event](ref.current, (ev, bound)=>{
+  useEffect(_=>Element.jet[event](ref.current, (bound, id)=>{
     if (bound.state !== "move") { setMove(bound.state === "start"); }
-    jet.run(onMove, bound);
+    if (onMove) { onMove(bound, id); }
   }, opt), Array.jet.to(opt));
 
   return [ref, move];

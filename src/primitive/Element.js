@@ -53,7 +53,7 @@ export default jet.define("Element", Element, {
             ele[(append ? "add" : "remove")+"EventListener"](type, handler, opt);
             return _=>Element.jet.listen(ele, type, handler, opt, !append);
         },
-        drift(ele, onDrag, opt={}) {
+        drift(ele, onDrift, opt={}) {
 
             opt.up = Number.jet.tap(opt.up, 1);
             opt.left = Number.jet.tap(opt.left, 1);
@@ -62,9 +62,11 @@ export default jet.define("Element", Element, {
 
             let { autoPick, appendState } = opt;
     
-            let _b, parent = Element.jet.parent(ele);
+            let _b, bid = 0, parent = Element.jet.parent(ele);
             const bound = Object.defineProperties({}, {
+                id:{enumerable, get:_=>bid},
                 target:{enumerable, value:ele},
+                event:{enumerable, get:_=>_b.event},
                 time:{enumerable, get:_=>(_b.stopTime || new Date())-_b.startTime},
                 x:{enumerable, get:_=>_b.x, set:v=>_b.x=Number.jet.to(v)},
                 y:{enumerable, get:_=>_b.y, set:v=>_b.y=Number.jet.to(v)},
@@ -76,7 +78,7 @@ export default jet.define("Element", Element, {
                 dirX:{enumerable, get:_=>bound.distX > 0 ? "right" : "left" },
                 dirY:{enumerable, get:_=>bound.distY > 0 ? "down" : "up"},
                 dir:{enumerable, get:_=>Math.abs(bound.distX) > Math.abs(bound.distY) ? bound.dirX : bound.dirY},
-                stop:{value:(delay=0)=>setTimeout(_=>exe("stop"), delay)}
+                stop:{value:(delay=0)=>delay > 0 ? setTimeout(_=>exe("stop"), delay) : exe("stop")}
             }); 
     
             DRAG.bounds.map(k=>Object.defineProperty(bound, k, {enumerable, get:_=>_b[k]}));
@@ -84,6 +86,7 @@ export default jet.define("Element", Element, {
             const exe = (state, ev)=>{
                 if (DRAG.ignored.includes(_b?.state+">"+state)) { return; }
 
+                const id = bid = bid + 1;
                 const init = (state === "start" || state === "init");
     
                 if (init) { 
@@ -99,7 +102,8 @@ export default jet.define("Element", Element, {
                     _b.pickX = autoPick ? 0 : (_b.width/2 - (pos.clientX-_b.left)) || 0;
                     _b.pickY = autoPick ? 0 : (_b.height/2 - (pos.clientY-_b.top)) || 0;
                 }
-    
+
+                _b.event = ev;
                 _b.state = state;
                 _b.x = (pos.clientX - _b.parent.left + _b.pickX) || 0;
                 _b.y = (pos.clientY - _b.parent.top + _b.pickY) || 0;
@@ -108,23 +112,24 @@ export default jet.define("Element", Element, {
                 
                 if (state === "stop") { _b.stopTime = new Date(); }
                 if (state === "stop" || state === "start") {
-                    DRAG.evlist.map(ev=>[
-                        Element.jet.listen(document, ev, move, null, state === "start"),
-                        DRAG.evmap[ev] === "move" ? Element.jet.listen(ele, ev, null, null, state === "start") : null
-                    ]);
+                    for (const evt of DRAG.evlist) {
+                        Element.jet.listen(document, evt, move, null, state === "start");
+                        if (DRAG.evmap[evt] === "move") { Element.jet.listen(ele, evt, null, null, state === "start"); }
+                    }
                 } 
                 if (state === "stop" || state === "move") {
                     bound.distX = bound.distX*opt[bound.dirX];
                     bound.distY = bound.distY*opt[bound.dirY];
                 }
+
                 if (appendState) {
                     if (state === "move") { ele.setAttribute("data-drift", [bound.dirY, bound.dirX].join(" ")); }
                     else { ele.removeAttribute("data-drift"); }
                 }
                 
-                onDrag(ev, bound);
+                onDrift(bound, id);
 
-                _b.prevX = _b.x; _b.prevY = _b.y;
+                if (id === bid) { _b.prevX = _b.x; _b.prevY = _b.y; }
             };
 
             const move = ev=>exe(DRAG.evmap[ev.type] || "stop", ev);
@@ -137,7 +142,7 @@ export default jet.define("Element", Element, {
             if (parent) { exe("init"); }
             return _=>jet.run(cleanUp);
         },
-        drag(ele, onShift, opt={}) {
+        drag(ele, onDrag, opt={}) {
             let { initX, initY, absolute, autoReset } = opt;
     
             function set(x, y) {
@@ -146,9 +151,10 @@ export default jet.define("Element", Element, {
             }
             set(Number.jet.to(initX), Number.jet.to(initY));
             
-            return Element.jet.drift(ele, (ev, bound)=>{
-                if (onShift) { onShift(ev, bound); }
-                if (bound.state === "move") { Event.jet.cut(ev); }
+            return Element.jet.drift(ele, (bound, id)=>{
+                if (onDrag) { onDrag(bound, id); }
+                if (bound.id !== id) { return; }
+                if (bound.state === "move") { Event.jet.cut(bound.event); }
                 if (bound.state === "stop" && autoReset) { set(initX, initY); }
                 else if (bound.state !== "init") { set(absolute ? bound.x : bound.relX, absolute ? bound.y : bound.relY); }
             }, opt);
@@ -166,9 +172,9 @@ export default jet.define("Element", Element, {
 
             let { minDist, maxTime } = opt;
 
-            return Element.jet.drag(ele, (ev, bound)=>{
+            return Element.jet.drag(ele, (bound, id)=>{
                 const { state, time, dist } = bound;
-                if (onSwipe && state === "stop" && time < maxTime && dist > minDist) { onSwipe(ev, bound); }
+                if (onSwipe && state === "stop" && time < maxTime && dist > minDist) { onSwipe(bound, id); }
             }, opt);
         }
     }

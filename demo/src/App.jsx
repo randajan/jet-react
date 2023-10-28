@@ -21,9 +21,11 @@ export default _=>{
     const [ pageSearch, searchChanges ] = page.use("search");
     const [ screenSugar, screenChanges ] = screen.use();
 
-    const [ ref, move ] = useDrag((bound)=>{
+    const [ ref, move ] = useDrag((bound, id)=>{
         //bound.relX = Number.jet.snap(bound.relX, .025, 0.25, 1);
         //if (bound.dir === "up") { bound.relY = Number.jet.snap(bound.relY, .1, 0.25, .75);}
+        if (bound.state === "start" && bound.event?.button !== 0) { bound.stop(); }
+        if (bound.state === "start" && bound.event.target !== bound.target) { bound.stop(); }
         if (bound.dist > 300) { bound.stop(); }
     }, {
         initX:pageSearch.get("x"),
@@ -36,12 +38,10 @@ export default _=>{
         appendState:true
     });
 
-    
-
     return (
         <div className="App" data-flags={ReactComponent.jet.flags(_=>_, "a")}>
             <div className="wrap">
-                <div id="test" ref={ref}/>
+                <div id="test" ref={ref}><span>p</span></div>
             </div>
             <div>{ReactComponent.jet.flags(screen.get(), "A").join(" | ")}</div>
             <Link to="#contact=up">TO MIDDLE</Link>

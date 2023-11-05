@@ -10,6 +10,7 @@
     ".": "./dist/index.js",
     "./page": "./dist/base/page.js",
     "./screen": "./dist/base/screen.js",
+    "./store": "./dist/base/store.js",
     "./dom": "./dist/elements/dom/index.js"
   },
   "scripts": {

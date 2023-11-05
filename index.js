@@ -9,6 +9,7 @@ slib(
                 "./index.js",
                 "./base/page.js",
                 "./base/screen.js",
+                "./base/store.js",
                 "./elements/dom/index.js",
             ],
             loader:{

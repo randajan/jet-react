@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import {  useDrag, ReactComponent } from "../../dist/index.js";
 import page from "../../dist/base/page";
 import screen from "../../dist/base/screen";
+import store from "../../dist/base/store.js";
 import { Link } from "../../dist/elements/dom/index.js";
 import "./test.css";
 
 import jet from "@randajan/jet-core";
+
+window.stores = store;
 
 const TestInject = (props) => {
 

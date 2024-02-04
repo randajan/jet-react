@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {  useDrag, ReactComponent } from "../../dist/index.js";
+import {  useDrag, ReactComponent, usePromise } from "../../dist/index.js";
 import page from "../../dist/base/page";
 import screen from "../../dist/base/screen";
 import store from "../../dist/base/store.js";

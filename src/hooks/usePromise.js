@@ -1,15 +1,19 @@
 import { useState, useEffect, useCallback } from "react";
-
+import jet from "@randajan/jet-core";
 
 export const usePromise = (init, pull, deps=[])=>{
-    const [data, setData] = useState(init);
+    const [[status, data], set] = useState(["init", init]);
 
-    const pullAndSet = useCallback(async _ => { if (pull) { setData(await pull()); } }, deps||[]);
-    const refresh = useCallback(_=>{ pullAndSet(); }, [pullAndSet]);
+    const refresh = async _ => {
+        if (!jet.isRunnable(pull)) { set(["done"]); return; }
+        set(["loading", data]); //keep last data while loading
+        try { set(["done", await pull()]); } //set new data
+        catch(err) { set(["error", data]); } //keep last data after error
+    }
 
-    useEffect(refresh, [refresh]);
+    useEffect(_=>{ refresh() }, deps||[]);
 
-    return [data, refresh];
+    return [data, status, refresh];
 }
 
 

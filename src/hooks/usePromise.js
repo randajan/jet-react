@@ -5,7 +5,10 @@ export const usePromise = (init, pull, deps=[])=>{
     const [[status, data], set] = useState(["init", init]);
 
     const refresh = async _ => {
-        if (!jet.isRunnable(pull)) { return; }
+        if (!jet.isRunnable(pull)) {
+            if (status !== "init") { set(["init", init]); }
+            return;
+        }
         set(["loading", data]); //keep last data while loading
         try { set(["done", await pull()]); } //set new data
         catch(err) { set(["error", data]); } //keep last data after error

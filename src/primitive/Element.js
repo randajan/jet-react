@@ -15,10 +15,8 @@ const DRAG = {
 export default jet.define("Element", Element, {
     create:(x, ...args)=>document.createElement(String.jet.to(x) || "div", ...args),
     to:x=>x.outerHTML,
-    extendConstructor:{
+    extend:{
         find:(query, all=false)=>all ? document.querySelectorAll(query) : document.querySelector(query),
-    },
-    extendPrototype:{
         parent:ele=>ele ? (ele.parentElement || ele.parentNode) : undefined,
         scroll:ele=>{
             const s = "scroll", c = "client";

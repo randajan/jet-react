@@ -1,7 +1,9 @@
 
 import React, { Component } from "react";
 
-import jet, { Pool } from "@randajan/jet-core";
+import jet from "@randajan/jet-core";
+import { each } from "@randajan/jet-core/eachSync";
+import Pool from "@randajan/jet-core/pool";
 
 import { useForceRender } from "../hooks/useForceRender.js";
 import { useFocus } from "../hooks/useFocus.js";
@@ -34,7 +36,7 @@ const buildProps = (input, include = {}, exclude = [], force = false) => {
 
 export default jet.define("ReactComponent", Component, {
     to: x => x.render(),
-    extendConstructor: {
+    extend: {
         useForceRender,
         useFocus,
         useDrift,
@@ -43,12 +45,12 @@ export default jet.define("ReactComponent", Component, {
         flags: (flags, ...args) => {
             const result = new Set();
 
-            jet.forEach(flags, (flag, key) => {
+            each(flags, (flag, { key }) => {
                 flag = String.jet.to(flag, ...args);
                 if (!flag || flag === "false") { return; }
                 else if (flag === "true") { result.add(key); }
                 else { result.add(flag); }
-            }, true);
+            }, { deep:true });
 
             return new Pool(...result);
 

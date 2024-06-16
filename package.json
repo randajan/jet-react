@@ -20,7 +20,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "@randajan/simple-lib": "^2.1.4"
+    "@randajan/simple-lib": "^2.3.1"
   },
   "files": [
     "dist",
@@ -41,12 +41,12 @@
     "url": "https://www.linkedin.com/in/randajan/"
   },
   "peerDependencies": {
-    "@randajan/jet-base": "^2.2.1",
-    "@randajan/jet-core": "^3.2.17",
-    "path-to-regexp": "^6.2.1",
-    "query-string": "^8.2.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@randajan/jet-base": "^2.3.1",
+    "@randajan/jet-core": "^4.1.0",
+    "path-to-regexp": "^6.2.2",
+    "query-string": "^9.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-transition-group": "^4.4.5"
   }
 }

@@ -3,7 +3,7 @@ import jet from "@randajan/jet-core";
 
 
 export default jet.define("Event", Event, {
-    extendPrototype:{
+    extend:{
         cut(ev, stopPropagation=false) {
             if (!ev) { return; }
             if (ev.preventDefault) { ev.preventDefault(); }

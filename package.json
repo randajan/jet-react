@@ -43,7 +43,7 @@
   "peerDependencies": {
     "@randajan/jet-base": "^2.3.1",
     "@randajan/jet-core": "^4.1.0",
-    "path-to-regexp": "^6.2.2",
+    "path-to-regexp": "^7.0.0",
     "query-string": "^9.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

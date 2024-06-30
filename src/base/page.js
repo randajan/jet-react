@@ -24,18 +24,18 @@ class Page extends BaseSync {
             const his = window.history;
     
             let setFrom = true, setTo;
-    
+
+            base.fit("pathname", (next, v)=>next(setFrom ? loc.pathname : v));
             base.fit("search", (next, v)=>next(setFrom ? loc.search : v));
             base.fit("hash", (next, v)=>next(setFrom ? loc.hash : v));
-    
+            
             base.fit((next, v)=>{
                 v = Object.jet.tap(v);
+
                 v.protocol = loc.protocol;
                 v.hostname = loc.hostname;
                 v.port = loc.port;
                 v.origin = loc.origin;
-    
-                if (setFrom) { v.pathname = loc.pathname; }
                 
                 v.search = parseQuery(v.search, "?");
                 v.hash = parseQuery(v.hash, "#");

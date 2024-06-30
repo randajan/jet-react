@@ -44,7 +44,9 @@ class Page extends BaseSync {
                 const hash = buildQuery(v.hash);
     
                 v.title = String.jet.to(v.title);
-                v.pathname = String.jet.to(v.pathname, "/");
+                v.pathname = String.jet.to(v.pathname);
+                if (!v.pathname.startsWith("/")) { v.pathname = "/" + v.pathname; }
+                
                 v.path = v.pathname + (search ? "?"+search : "") + (hash ? "#"+hash : "");
                 v.href = v.origin + v.path;
     

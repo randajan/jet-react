@@ -23,6 +23,10 @@ class Store extends BaseSync {
                 if (!Array.isArray(cc) || !cc.length) { return remove(id); }
                 save(id, Object.jet.filter(data, (v, k)=>k === _cc || cc.includes(k)));
             });
+
+            this.refresh = _=>base.set(load(id));
+
+            window.addEventListener("storage", this.refresh);
         });
         
     }
@@ -37,6 +41,10 @@ class Store extends BaseSync {
 
     dismiss() {
         return this.remove(_cc);
+    }
+
+    refresh() {
+        return false;
     }
 }
 

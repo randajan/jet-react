@@ -1,6 +1,8 @@
 import jet from "@randajan/jet-core";
 import { BaseSync } from "@randajan/jet-base";
 
+const { virtual } = jet.prop;
+
 const _cc = "$$cookiesConsent";
 
 const load = id=>jet.json.from(localStorage.getItem(id));
@@ -9,13 +11,13 @@ const remove = id=>localStorage.removeItem(id);
 
 class Store extends BaseSync {
     constructor() {
+        let isSyncing = false;
 
         super((base, config)=>{
             const id = config.id || "$$baseLocalStore";
 
-            let _setting = false;
             base.watch("", get=>{
-                if (_setting) { return; }
+                if (isSyncing) { return; }
                 const data = get();
                 if (!data) { return; }
                 const cc = data[_cc];
@@ -25,15 +27,17 @@ class Store extends BaseSync {
             });
 
             this.refresh = _=>{
-                _setting = true;
+                isSyncing = true;
                 base.set(load(id));
-                _setting = false;
+                isSyncing = false;
             }
 
             window.addEventListener("storage", this.refresh);
 
             base.set(load(id));
         });
+
+        virtual(this, "isSyncing", _=>isSyncing);
         
     }
 

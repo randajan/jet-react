@@ -13,8 +13,6 @@ class Store extends BaseSync {
         super((base, config)=>{
             const id = config.id || "$$baseLocalStore";
 
-            base.set(load(id));
-
             let _setting = false;
             base.watch("", get=>{
                 if (_setting) { return; }
@@ -33,6 +31,8 @@ class Store extends BaseSync {
             }
 
             window.addEventListener("storage", this.refresh);
+
+            base.set(load(id));
         });
         
     }
@@ -50,7 +50,7 @@ class Store extends BaseSync {
     }
 
     refresh() {
-        return false;
+        return [];
     }
 }
 

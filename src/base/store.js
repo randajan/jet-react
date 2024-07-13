@@ -15,7 +15,9 @@ class Store extends BaseSync {
 
             base.set(load(id));
 
+            let _setting = false;
             base.watch("", get=>{
+                if (_setting) { return; }
                 const data = get();
                 if (!data) { return; }
                 const cc = data[_cc];
@@ -24,7 +26,11 @@ class Store extends BaseSync {
                 save(id, Object.jet.filter(data, (v, k)=>k === _cc || cc.includes(k)));
             });
 
-            this.refresh = _=>base.set(load(id));
+            this.refresh = _=>{
+                _setting = true;
+                base.set(load(id));
+                _setting = false;
+            }
 
             window.addEventListener("storage", this.refresh);
         });

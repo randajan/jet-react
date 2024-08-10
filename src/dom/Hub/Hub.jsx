@@ -52,7 +52,7 @@ export class Hub extends Plex {
 
   Provider(props) {
     const _p = _privates.get(this);
-    const { transition, transitionPrefix } = props;
+    const { id, className, transition, transitionPrefix } = props;
     let matchedRoute;
     let matchedParams;
 
@@ -70,7 +70,7 @@ export class Hub extends Plex {
 
     if (transition) {
       content = (
-        <TransitionGroup {...Component.jet.buildProps(props, {}, ["children", "transition", "transitionPrefix"])}>
+        <TransitionGroup id={id} className={className}>
           <CSSTransition key={_p.key++} classNames={transitionPrefix} timeout={transition} appear >
             {content || <></>}
           </CSSTransition>

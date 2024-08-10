@@ -28,6 +28,7 @@ const formatMatchers = routes=>{
 }
 
 export const createRouter = (...routes)=>{
+    let _c = 0;
     const def = {params:{}};
     const context = createContext(def);
 
@@ -51,7 +52,7 @@ export const createRouter = (...routes)=>{
         if (transition) {
             routeContent = (
                 <TransitionGroup {...Component.jet.buildProps(props, {}, ["children", "transition", "transitionPrefix"])}>
-                    <CSSTransition key={c++} classNames={transitionPrefix} timeout={transition} appear >
+                    <CSSTransition key={_c++} classNames={transitionPrefix} timeout={transition} appear >
                         {routeContent}
                     </CSSTransition>
                 </TransitionGroup>

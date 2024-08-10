@@ -5,7 +5,6 @@ import { ReactComponent } from "../../dist/index.js";
 import screen from "../../dist/base/screen";
 
 import createRouter from "../../dist/dom/Router/Router";
-import Route from "../../dist/dom/Route/Route";
 
 import Modal from "../../dist/dom/Modal";
 import Block from "../../dist/dom/Block/Block";
@@ -27,25 +26,17 @@ const pages = list({
     TestForm,
     TestTable
 
-}, (Child, ctx)=>{
+}, (Children, ctx)=>{
     const caption = ctx.key.replace(/([A-Z])/g, ' $1').trim();
     return {
         path:"/"+String.jet.camelCase(caption.toLowerCase()),
         caption,
-        content:<Child/>
+        content:<Block caption={caption} children={<Children/>}/>
     }
 });
 
 
-const Router = createRouter(
-    pages.map(page=>(
-        <Route path={"/"+String.jet.camelCase(page.caption)} exact>
-            <Block caption={page.caption}>
-                {page.content}
-            </Block>
-        </Route>
-    ))
-);
+const Router = createRouter(pages);
 
 
 export default _=>{

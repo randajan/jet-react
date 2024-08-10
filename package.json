@@ -15,8 +15,6 @@
     "./dom/router/css": "./dist/dom/Router/Router.css",
     "./dom/link": "./dist/dom/Link/Link.js",
     "./dom/link/css": "./dist/dom/Link/Link.css",
-    "./dom/route": "./dist/dom/Route/Route.js",
-    "./dom/route/css": "./dist/dom/Route/Route.js",
     "./dom/article": "./dist/dom/Article/Article.js",
     "./dom/article/css": "./dist/dom/Article/Article.css",
     "./dom/modal": "./dist/dom/Modal/index.js",

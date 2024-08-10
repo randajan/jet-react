@@ -31,7 +31,6 @@ slib(
                 "./dom/Tile/Tile.jsx",
                 "./dom/Modal/index.js",
                 "./dom/Router/Router.jsx",
-                "./dom/Route/Route.jsx",
                 "./dom/Link/Link.jsx",
                 "./dom/Table/Table.jsx",
                 "./dom/Menu/Menu.jsx",

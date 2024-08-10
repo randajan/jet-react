@@ -1,5 +1,4 @@
 import React, { Component, createContext, useContext, useMemo, useState } from 'react';
-import { list } from "@randajan/jet-core/eachSync";
 import { match } from 'path-to-regexp';
 import page from "../../base/page";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -14,17 +13,22 @@ const formatRoute = (route)=>{
     return Object.jet.extract(route.props, ["path", "exact", "children"]);
 }
 
-const formatMatchers = routes=>{
-    return list(routes, route=>{
+
+const formatMatchers = (routes, list=[])=>{
+
+    for (let route of routes) {
+        if (Array.isArray(route)) { formatMatchers(route, list); continue; }
         const { path, exact, children, content } = route = formatRoute(route);
         const c = children || content;
-        if (!c) { return; }
+        if (!c) { continue; }
         const matcher = match(path || "(.*)", {
             end:exact,
             decode: decodeURIComponent,
         });
-        return [matcher, c, Object.jet.exclude(route, ["children", "content"])];
-    }, { deep:true });
+        list.push([matcher, c, Object.jet.exclude(route, ["children", "content"])]);
+    }
+
+    return list;
 }
 
 export const createRouter = (...routes)=>{
@@ -37,7 +41,7 @@ export const createRouter = (...routes)=>{
         const [ pagePathname ] = page.use("pathname");
         const currentPath = pagePathname.get();
 
-        const matchers = useMemo(_=>formatMatchers([routes, children]), [children]);
+        const matchers = useMemo(_=>formatMatchers([children, ...routes]), [children]);
         let routeContent = null;
         let routeDetail = def;
 
@@ -67,5 +71,13 @@ export const createRouter = (...routes)=>{
 
     return Provider;
 }
+
+export const Route = (props) => {
+    return (
+        <div className={ cn("Route", props.className) }>
+            {props.children}
+        </div>
+    );
+};
 
 export default createRouter;

@@ -53,7 +53,7 @@ export const createRouter = (...routes)=>{
             routeContent = (
                 <TransitionGroup {...Component.jet.buildProps(props, {}, ["children", "transition", "transitionPrefix"])}>
                     <CSSTransition key={_c++} classNames={transitionPrefix} timeout={transition} appear >
-                        {routeContent}
+                        {routeContent || <></>}
                     </CSSTransition>
                 </TransitionGroup>
             )

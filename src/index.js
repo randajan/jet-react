@@ -9,9 +9,11 @@ import { useForceRender } from "./hooks/useForceRender.js";
 import { useFocus } from "./hooks/useFocus.js";
 import { useDrift, useDrag, useSwipe } from "./hooks/useDrift.js";
 import { usePromise } from "./hooks/usePromise.js";
+import { useStateSafe } from "./hooks/useStateSafe.js";
+import { useIsMounted } from "./hooks/useIsMounted.js";
 
 import "./hooks/useBase";
-
+import { cssTranslate, cn } from "./tools/css.js";
 
 
 export default jet;
@@ -20,10 +22,14 @@ export {
     Event,
     ReactComponent,
     ReactElement,
+    cssTranslate,
+    cn,
     useForceRender,
     usePromise,
     useFocus,
     useDrift,
     useDrag,
-    useSwipe
+    useSwipe,
+    useStateSafe,
+    useIsMounted
 }

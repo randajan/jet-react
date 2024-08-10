@@ -2,7 +2,7 @@
 
 [![NPM](https://img.shields.io/npm/v/@randajan/jet-react.svg)](https://www.npmjs.com/package/@randajan/jet-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-This package extend jet-core for frontend use.
+This package boost react page development.
 
 ## Install
 

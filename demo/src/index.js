@@ -6,7 +6,8 @@ import screen from "../../dist/base/screen";
 import store from "../../dist/base/store";
 
 import App from './App';
-import "./index.css";
+import "../../dist/dom/Form/index.css";
+import "./index.scss";
 
 createRoot(Element.jet.find("#root")).render(<App />);
 
@@ -19,6 +20,3 @@ window.baseStore = store;
 page.debug = true;
 screen.debug = true;
 store.debug = true;
-
-
-

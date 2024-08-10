@@ -1,70 +1,67 @@
 import React, { Component } from "react";
-import {  useDrag, ReactComponent, usePromise } from "../../dist/index.js";
-import page from "../../dist/base/page";
+import { list } from "@randajan/jet-core/eachSync";
+
+import { ReactComponent } from "../../dist/index.js";
 import screen from "../../dist/base/screen";
-import store from "../../dist/base/store.js";
-import { Link } from "../../dist/elements/dom/index.js";
-import "./test.css";
 
-import jet from "@randajan/jet-core";
+import createRouter from "../../dist/dom/Router/Router";
+import Route from "../../dist/dom/Route/Route";
 
-window.stores = store;
+import Modal from "../../dist/dom/Modal";
+import Block from "../../dist/dom/Block/Block";
+import Link from "../../dist/dom/Link/Link";
 
-const TestInject = (props) => {
+import { PropsInject } from "./tests/PropsInject/PropsInject.jsx";
+import { TestForm } from "./tests/TestForm/TestForm.jsx";
+import { Dragable } from "./tests/Dragable/Dragable.jsx";
+import { TestArticle } from "./tests/TestArticle/TestArticle.jsx";
+import { TestTable } from "./tests/TestTable/TestTable.jsx";
 
-    return ReactComponent.jet.inject(
-      props.children, (ele, key, level)=>{
-        return {children:key+":"+level, id:"li-"+key+"-"+level}
-      },
-      true, ["li"]
-    );
-  }
+import Menu from "../../dist/dom/Menu/Menu";
+import "../../dist/dom/Menu/Menu.css";
+
+const pages = list({
+    TestArticle,
+    Dragable,
+    PropsInject,
+    TestForm,
+    TestTable
+
+}, (Child, ctx)=>{
+    const caption = ctx.key.replace(/([A-Z])/g, ' $1').trim();
+    return {
+        path:"/"+String.jet.camelCase(caption.toLowerCase()),
+        caption,
+        content:<Child/>
+    }
+});
+
+
+const Router = createRouter(
+    pages.map(page=>(
+        <Route path={"/"+String.jet.camelCase(page.caption)} exact>
+            <Block caption={page.caption}>
+                {page.content}
+            </Block>
+        </Route>
+    ))
+);
+
 
 export default _=>{
-    const [ pageSearch, searchChanges ] = page.use("search");
     const [ screenSugar, screenChanges ] = screen.use();
 
-    const [ ref, move ] = useDrag((bound, id)=>{
-        //bound.relX = Number.jet.snap(bound.relX, .025, 0.25, 1);
-        //if (bound.dir === "up") { bound.relY = Number.jet.snap(bound.relY, .1, 0.25, .75);}
-        if (bound.state === "start" && bound.event?.button !== 0) { bound.stop(); }
-        if (bound.state === "start" && bound.event.target !== bound.target) { bound.stop(); }
-        if (bound.dist > 300) { bound.stop(); }
-    }, {
-        initX:pageSearch.get("x"),
-        initY:pageSearch.get("y"),
-        up:.5,
-        left:.005,
-        right:.005,
-        down:.005,
-        autoReset:true,
-        appendState:true
-    });
-
     return (
-        <div className="App" data-flags={ReactComponent.jet.flags(_=>_, "a")}>
-            <div className="wrap">
-                <div id="test" ref={ref}><span>p</span></div>
-            </div>
-            <div>{ReactComponent.jet.flags(screen.get(), "A").join(" | ")}</div>
-            <Link to="#contact=up">TO MIDDLE</Link>
-            <TestInject>
-                <ul>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                </ul>
-            </TestInject>
-            <div style={{visibility:move ? "hidden" : "visible"}}>
-                <input onChange={ev=>page.set("search.x", ev.target.value)} value={page.get("search.x") || 0}/>
-                <input onChange={ev=>page.set("search.y", ev.target.value)} value={page.get("search.y") || 0}/>
-            </div>
-
-        </div>
+        <Modal className="App" data-flags={ReactComponent.jet.flags(_=>_, "a")}>
+            <div className="Hull">
+                <Block className="header">
+                    <Menu trigger="MENU" position="top-left">
+                        {pages.map((page, key)=><div key={key}><Link to={page.path}>{page.caption}</Link></div>)}
+                    </Menu>
+                </Block>
+                <Router/>
+            </div>           
+            {/* <div>{ReactComponent.jet.flags(screen.get(), "A").join(" | ")}</div>*/}
+        </Modal>
     )
 }

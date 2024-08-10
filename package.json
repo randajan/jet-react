@@ -8,10 +8,52 @@
   "module": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",
-    "./page": "./dist/base/page.js",
-    "./screen": "./dist/base/screen.js",
-    "./store": "./dist/base/store.js",
-    "./dom": "./dist/elements/dom/index.js"
+    "./base/page": "./dist/base/page.js",
+    "./base/screen": "./dist/base/screen.js",
+    "./base/store": "./dist/base/store.js",
+
+    "./dom/router": "./dist/dom/Router/Router.js",
+    "./dom/router/css": "./dist/dom/Router/Router.css",
+
+    "./dom/link": "./dist/dom/Link/Link.js",
+    "./dom/link/css": "./dist/dom/Link/Link.css",
+
+    "./dom/route": "./dist/dom/Route/Route.js",
+    "./dom/route/css": "./dist/dom/Route/Route.js",
+
+    "./dom/article":"./dist/dom/Article/Article.js",
+    "./dom/article/css":"./dist/dom/Article/Article.css",
+
+    "./dom/modal":"./dist/dom/Modal/index.js",
+    "./dom/modal/css":"./dist/dom/Modal/index.css",
+
+    "./dom/caption":"./dist/dom/Caption/Caption.js",
+    "./dom/caption/css":"./dist/dom/Caption/Caption.css",
+
+    "./dom/block":"./dist/dom/Block/Block.js",
+    "./dom/block/css":"./dist/dom/Block/Block.css",
+
+    "./dom/img":"./dist/dom/Img/Img.js",
+    "./dom/img/css":"./dist/dom/Img/Img.css",
+
+    "./dom/tile":"./dist/dom/Tile/Tile.js",
+    "./dom/tile/css":"./dist/dom/Tile/Tile.css",
+
+    "./dom/table":"./dist/dom/Table/Table.js",
+    "./dom/table/css":"./dist/dom/Table/Table.css",
+
+    "./dom/trigger":"./dist/dom/Trigger/Trigger.js",
+    "./dom/trigger/css":"./dist/dom/Trigger/Trigger.css",
+
+    "./dom/pane":"./dist/dom/Pane/Pane.js",
+    "./dom/pane/css":"./dist/dom/Pane/Pane.css",
+
+    "./dom/menu":"./dist/dom/Menu/Menu.js",
+    "./dom/menu/css":"./dist/dom/Menu/Menu.css",
+
+    "./dom/form": "./dist/Form/index.js",
+    "./dom/form/css": "./dist/Form/index.css"
+
   },
   "scripts": {
     "start": "set NODE_ENV=dev&& node ./index.js",
@@ -20,7 +62,10 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "@randajan/simple-lib": "^2.3.2"
+    "@randajan/simple-lib": "^2.3.2",
+    "esbuild": "^0.23.0",
+    "esbuild-sass-plugin": "^3.3.1",
+    "node-sass": "^9.0.0"
   },
   "files": [
     "dist",
@@ -41,12 +86,15 @@
     "url": "https://www.linkedin.com/in/randajan/"
   },
   "peerDependencies": {
-    "@randajan/jet-base": "^2.3.1",
+    "@randajan/jet-base": "^2.3.2",
     "@randajan/jet-core": "^4.1.0",
-    "path-to-regexp": "^7.0.0",
-    "query-string": "^9.0.0",
+    "markdown-to-jsx": "^7.4.7",
+    "path-to-regexp": "^7.1.0",
+    "prop-types": "^15.8.1",
+    "query-string": "^9.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-transition-group": "^4.4.5"
+    "react-transition-group": "^4.4.5",
+    "sass-embedded": "^1.77.8"
   }
 }

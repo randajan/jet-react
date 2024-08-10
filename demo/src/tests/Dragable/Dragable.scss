@@ -1,0 +1,19 @@
+.Dragable {
+  .board {
+    position:absolute; top:0; left:0; right:0; bottom:0; margin:0; padding:0;
+    pointer-events:none;
+
+    #circle {
+      position:absolute;
+      background-color:orange; width:5em; height:5em; margin:0; padding:0; transform: translate(-50%, -50%); border-radius:100%;
+      user-select:none;
+      pointer-events:auto;
+    }
+    
+    #circle:not([data-drift]) {
+      transition: .5s cubic-bezier(0.75, 0.01, 0.5, 1.75);
+    }
+  }
+
+
+}

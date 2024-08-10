@@ -1,0 +1,39 @@
+.Slider {
+    position:relative;
+}
+
+.pin {
+    display:block;
+    position:absolute;
+    width:1em;
+    height:1em;
+    padding:0;
+    transform:translate(-50%, -50%);
+    border-radius:.5em;
+    transition:transform .2s, background-color .2s;
+
+    &[data-flags~="lock"] {
+        background-color:#eee;
+        border: 1px solid #444;
+        pointer-events:none;
+        transform:translate(-50%, -50%) scale(.9);
+        cursor:default;
+    }
+
+    &:not([data-flags~="lock"]) {
+        background-color:#fff;
+        border: 1px solid #222;
+        cursor:pointer;
+    }
+
+    &[data-flags~="shifting"] {
+        transform:translate(-50%, -50%) scale(1.1);
+    }
+
+    &:not([data-flags~="shifting"]) {
+        transition: top .2s, left .2s, transform .2s;
+        &:hover {
+            transform:translate(-50%, -50%) scale(1.05);
+        }
+    }
+}

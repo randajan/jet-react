@@ -2,7 +2,7 @@ import React from "react";
 import jet from "@randajan/jet-core";
 import RunPool from "@randajan/jet-core/runpool";
 
-const { solid, safe, virtual } = jet.prop;
+const { solid, virtual } = jet.prop;
 
 const fetchProps = props => (String.jet.is(props) || React.isValidElement(props)) ? { children: props } : Object.jet.tap(props);
 

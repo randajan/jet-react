@@ -74,7 +74,7 @@ export class Hub extends Plex {
     if (transition) {
       content = (
         <TransitionGroup id={id} className={className}>
-          <CSSTransition key={_c.key++} classNames={transitionPrefix} timeout={transition} appear >
+          <CSSTransition key={_c.key} classNames={transitionPrefix} timeout={transition} appear >
             {content || <></>}
           </CSSTransition>
         </TransitionGroup>

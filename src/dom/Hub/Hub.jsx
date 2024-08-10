@@ -6,12 +6,13 @@ import Plex from '@randajan/jet-core/plex';
 
 const _privates = new WeakMap();
 
+const setCurrent = ()=>({key:0});
+
 export class Hub extends Plex {
   constructor(routeMatch, routeRender, routeFormat) {
     super(props => this.Provider(props));
 
     const _p = {
-      key: 0,
       routeMatch,
       routeRender,
       routeFormat,
@@ -51,6 +52,7 @@ export class Hub extends Plex {
   }
 
   Provider(props) {
+    const _c = useMemo(setCurrent, []);
     const _p = _privates.get(this);
     const { id, className, transition, transitionPrefix } = props;
     let matchedRoute;
@@ -64,21 +66,22 @@ export class Hub extends Plex {
       break;
     }
 
+    if (matchedRoute !== _c.route) { _c.key++; _c.route = matchedRoute; }
     const params = matchedParams || {};
-    const route = matchedRoute ? {...matchedRoute, params} : {params};
+    const details = matchedRoute ? {...matchedRoute, params} : {params};
     let content = matchedRoute ? _p.routeRender(matchedRoute, params) : null;
 
     if (transition) {
       content = (
         <TransitionGroup id={id} className={className}>
-          <CSSTransition key={_p.key++} classNames={transitionPrefix} timeout={transition} appear >
+          <CSSTransition key={_c.key++} classNames={transitionPrefix} timeout={transition} appear >
             {content || <></>}
           </CSSTransition>
         </TransitionGroup>
       )
     }
 
-    return <_p.context.Provider value={route} children={content} />;
+    return <_p.context.Provider value={details} children={content} />;
   }
 
 }

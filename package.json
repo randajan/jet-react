@@ -37,8 +37,8 @@
     "./dom/pane/css": "./dist/dom/Pane/Pane.css",
     "./dom/menu": "./dist/dom/Menu/Menu.js",
     "./dom/menu/css": "./dist/dom/Menu/Menu.css",
-    "./dom/form": "./dist/Form/index.js",
-    "./dom/form/css": "./dist/Form/index.css"
+    "./dom/form": "./dist/dom/Form/index.js",
+    "./dom/form/css": "./dist/dom/Form/index.css"
   },
   "scripts": {
     "start": "set NODE_ENV=dev&& node ./index.js",

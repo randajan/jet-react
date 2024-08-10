@@ -12,7 +12,7 @@
     "./base/screen": "./dist/base/screen.js",
     "./base/store": "./dist/base/store.js",
     "./dom/router": "./dist/dom/Router/Router.js",
-    "./dom/router/css": "./dist/dom/Router/Router.css",
+    "./dom/hub": "./dist/dom/Hub/Hub.js",
     "./dom/link": "./dist/dom/Link/Link.js",
     "./dom/link/css": "./dist/dom/Link/Link.css",
     "./dom/article": "./dist/dom/Article/Article.js",

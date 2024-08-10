@@ -30,6 +30,7 @@ slib(
                 "./dom/Img/Img.jsx",
                 "./dom/Tile/Tile.jsx",
                 "./dom/Modal/index.js",
+                "./dom/Hub/Hub.jsx",
                 "./dom/Router/Router.jsx",
                 "./dom/Link/Link.jsx",
                 "./dom/Table/Table.jsx",

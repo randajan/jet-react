@@ -80,7 +80,7 @@ export class Hub extends Plex {
 
     if (transition) {
       content = (
-        <TransitionGroup {...Object.jet.exclude(this.props, ["transition", "transitionPrefix", "match"])}>
+        <TransitionGroup {...Object.jet.exclude(props, ["transition", "transitionPrefix", "match"])}>
           <CSSTransition key={_c.key} classNames={transitionPrefix} timeout={transition} appear >
             {content || <></>}
           </CSSTransition>

@@ -40,14 +40,12 @@ const Router = createRouter(pages);
 
 
 export default _=>{
-    const [ screenSugar, screenChanges ] = screen.use();
-
     return (
         <Modal className="App" data-flags={ReactComponent.jet.flags(_=>_, "a")}>
             <div className="Hull">
                 <Block className="header">
                     <Menu trigger="MENU" position="top-left">
-                        {pages.map((page, key)=><div key={key}><Link to={page.path}>{page.caption}</Link></div>)}
+                        {Router.mapRoutes((page, key)=><div key={key}><Link to={page.path}>{page.caption}</Link></div>)}
                     </Menu>
                 </Block>
                 <Router/>

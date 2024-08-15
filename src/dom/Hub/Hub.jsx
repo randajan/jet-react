@@ -1,4 +1,4 @@
-import React, { Component, createContext, useContext, useMemo } from 'react';
+import React, { Component, createContext, useContext, useMemo, useRef } from 'react';
 import { match } from 'path-to-regexp';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import jet from "../../index";
@@ -43,6 +43,11 @@ export class Hub extends Plex {
 
     return this;
   }
+  
+  mapRoutes(mapper) {
+    const _p = _privates.get(this);
+    return _p.routes.map((route, key)=>mapper({...route, key}));
+  }
 
   matchRoute(match) {
     const _p = _privates.get(this);
@@ -71,6 +76,8 @@ export class Hub extends Plex {
   Provider(props) {
     const _p = _privates.get(this);
     const _c = useMemo(setCurrent, []);
+    const ref = useRef();
+
     const { transition, transitionPrefix, match } = props;
 
     const route = this.matchRoute(match);
@@ -81,8 +88,8 @@ export class Hub extends Plex {
     if (transition) {
       content = (
         <TransitionGroup {...Object.jet.exclude(props, ["transition", "transitionPrefix", "match"])}>
-          <CSSTransition key={_c.key} classNames={transitionPrefix} timeout={transition} appear >
-            {content || <></>}
+          <CSSTransition nodeRef={ref} key={_c.key} classNames={transitionPrefix} timeout={transition} appear >
+            {<div ref={ref}>{content || null}</div>}
           </CSSTransition>
         </TransitionGroup>
       )

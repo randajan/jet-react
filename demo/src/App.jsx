@@ -48,7 +48,7 @@ export default _=>{
                         {Router.mapRoutes((page, key)=><div key={key}><Link to={page.path}>{page.caption}</Link></div>)}
                     </Menu>
                 </Block>
-                <Router/>
+                <Router transition={1000} transitionPrefix={"page"}/>
             </div>           
             {/* <div>{ReactComponent.jet.flags(screen.get(), "A").join(" | ")}</div>*/}
         </Modal>

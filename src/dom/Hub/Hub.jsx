@@ -46,7 +46,7 @@ export class Hub extends Plex {
   
   mapRoutes(mapper) {
     const _p = _privates.get(this);
-    return _p.routes.map((route, key)=>mapper({...route, key}));
+    return _p.routes.map((route, key)=>mapper({...route}, key));
   }
 
   matchRoute(match) {
@@ -76,7 +76,6 @@ export class Hub extends Plex {
   Provider(props) {
     const _p = _privates.get(this);
     const _c = useMemo(setCurrent, []);
-    const ref = useRef();
 
     const { transition, transitionPrefix, match } = props;
 
@@ -84,6 +83,7 @@ export class Hub extends Plex {
 
     if (route.uid !== _c.uid) { _c.key++; _c.uid = route.uid; }
     let content = _p.routeRender(route);
+    const ref = useMemo(_=>({current:undefined}), [content]);
 
     if (transition) {
       content = (

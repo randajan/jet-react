@@ -30,7 +30,7 @@ class Page extends BaseSync {
             base.fit("hash", (next, v)=>next(setFrom ? loc.hash : v));
             
             base.fit((next, v)=>{
-                v = Object.jet.tap(v);
+                v = Object.jet.to(next(Object.jet.tap(v)));
 
                 v.protocol = loc.protocol;
                 v.hostname = loc.hostname;

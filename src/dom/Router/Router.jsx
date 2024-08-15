@@ -14,7 +14,7 @@ const formatRoute = (route)=>{
 export class Router extends Hub {
     constructor(routes) {
         super(
-            route=>route.matcher(page.get("pathname")),
+            (route, match)=>route.matcher(match),
             route=>route.children || route.content || null,
             route=>{
                 const { path, exact, children, content } = route = formatRoute(route);
@@ -31,8 +31,8 @@ export class Router extends Hub {
     }
 
     Provider(props={}) {
-        page.use("pathname");
-        return super.Provider(props);
+        const [pathname] = page.use("pathname");
+        return super.Provider({...props, match:pathname.get()});
     }
 }
 

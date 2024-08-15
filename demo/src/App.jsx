@@ -38,6 +38,8 @@ const pages = list({
 
 const Router = createRouter(pages);
 
+window.Router = Router;
+
 
 export default _=>{
     return (

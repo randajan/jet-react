@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import jet from "@randajan/jet-core";
+import jet from "../index";
 
 const useMove = (event, onMove, opt)=>{
   const [move, setMove] = useState(false);

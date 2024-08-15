@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
+import jet from "../../index";
 
-
-import jet from "@randajan/jet-core";
 
 import { Flagable } from '../../components/Flagable';
 import { Caption } from '../Caption/Caption';

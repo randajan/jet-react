@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useIsMounted } from './useIsMounted';
+import jet from "../index";
 
 
 export const useStateSafe = (...a)=>{

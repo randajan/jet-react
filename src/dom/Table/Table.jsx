@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import jet from "../../index";
 
-import jet from "@randajan/jet-core";
 import { each, list } from "@randajan/jet-core/eachSync";
 
 import { Flagable } from "../../components/Flagable";

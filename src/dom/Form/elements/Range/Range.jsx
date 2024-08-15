@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import jet from "@randajan/jet-core";
+import jet from "../../../../index";
 
 import { Label } from "../Label/Label";
 import { Button } from "../Button/Button";

@@ -1,4 +1,6 @@
 import React from 'react';
+import jet from "../../index";
+
 import { match } from 'path-to-regexp';
 import page from "../../base/page";
 import { Hub } from '../Hub/Hub';
@@ -12,9 +14,9 @@ const formatRoute = (route)=>{
 export class Router extends Hub {
     constructor(routes) {
         super(
-            (route, props)=>route.matcher(page.get("pathname")),
-            (route, params)=>route.children || route.content,
-            (route)=>{
+            route=>route.matcher(page.get("pathname")),
+            route=>route.children || route.content || null,
+            route=>{
                 const { path, exact, children, content } = route = formatRoute(route);
                 if (!(children || content)) { return; }
                 route.matcher = match(path || "(.*)", {

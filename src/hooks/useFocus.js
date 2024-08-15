@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import jet from "../index";
 
 export const useFocus = (focus, setFocus, lock)=>{
   const ref = useRef();

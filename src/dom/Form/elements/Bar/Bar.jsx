@@ -1,6 +1,6 @@
 import React from 'react';
+import jet from "../../../../index";
 
-import jet from "@randajan/jet-core";
 
 import { Flagable } from "../../../../components/Flagable";
 

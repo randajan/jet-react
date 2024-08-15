@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
+import jet from "../../../index";
 import { usePop } from '../hooks/usePop';
-
 
 export const PopUp = props=>{
   const pop = usePop(props);

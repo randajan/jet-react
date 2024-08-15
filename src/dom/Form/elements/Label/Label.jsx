@@ -1,4 +1,5 @@
 import React from 'react';
+import jet from "../../../../index";
 
 import "./Label.scss";
 import { cn } from '../../../../tools/css';

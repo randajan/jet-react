@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import jet from "../../index.js";
+import jet from "../../index";
 
 import page from "../../base/page.js";
 import { cn } from '../../tools/css.js';

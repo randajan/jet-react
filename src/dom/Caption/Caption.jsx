@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import jet from "@randajan/jet-core";
+import jet from "../../index";
 
 import { Block } from "../Block/Block";
 import { cn } from '../../tools/css';

@@ -1,8 +1,7 @@
 import React from 'react';
 import { CSSTransition } from "react-transition-group";
 import PropTypes from 'prop-types';
-
-import jet from "@randajan/jet-core";
+import jet from "../../index";
 
 import { Flagable } from "../../components/Flagable";
 import { cn } from '../../tools/css';

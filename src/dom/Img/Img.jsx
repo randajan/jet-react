@@ -1,4 +1,5 @@
 import React, { Component, useEffect, useRef } from 'react';
+import jet from "../../index";
 
 import page from '../../base/page';
 import { usePromise } from '../../hooks/usePromise';

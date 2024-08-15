@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import jet from "../../index";
 
 import { CSSTransition } from "react-transition-group";
-
-import jet from "@randajan/jet-core";
 
 import { Stateful } from "../../components/Stateful";
 import { cn } from '../../tools/css';

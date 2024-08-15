@@ -1,5 +1,6 @@
 import { BaseSync, BaseAsync } from "@randajan/jet-base";
 import { useEffect, useState } from "react";
+import jet from "../index";
 
 BaseSync.prototype.use = function use(path) {
     const [ sugar ] = useState(_=>this.sugar(path));

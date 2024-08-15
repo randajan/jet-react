@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import jet from "@randajan/jet-core";
+import jet from "../index";
 
 export const usePromise = (init, pull, deps=[])=>{
     const [[status, data], set] = useState(["init", init]);

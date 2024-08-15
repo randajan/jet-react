@@ -1,4 +1,5 @@
 import React from 'react';
+import jet from "../../index";
 
 import "./Tile.scss";
 

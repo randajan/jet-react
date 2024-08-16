@@ -1,6 +1,6 @@
 {
   "name": "@randajan/jet-react",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "Tools for quick webdev with react",
   "repository": "randajan/jet-react",
   "type": "module",
@@ -9,7 +9,7 @@
   "exports": {
     ".": "./dist/index.js",
     "./base/page": "./dist/base/page.js",
-    "./base/tab":"./dist/base/tab.js",
+    "./base/tab": "./dist/base/tab.js",
     "./base/screen": "./dist/base/screen.js",
     "./base/store": "./dist/base/store.js",
     "./dom/router": "./dist/dom/Router/Router.js",

@@ -24,6 +24,7 @@ slib(
                 "./base/page.js",
                 "./base/screen.js",
                 "./base/store.js",
+                "./base/tab.js",
                 "./dom/Article/Article.jsx",
                 "./dom/Block/Block.jsx",
                 "./dom/Caption/Caption.jsx",

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { list } from "@randajan/jet-core/eachSync";
 
 import { ReactComponent } from "../../dist/index.js";
-import screen from "../../dist/base/screen";
 
 import createRouter from "../../dist/dom/Router/Router";
 
@@ -18,28 +17,7 @@ import { TestTable } from "./tests/TestTable/TestTable.jsx";
 
 import Menu from "../../dist/dom/Menu/Menu";
 import "../../dist/dom/Menu/Menu.css";
-
-const pages = list({
-    TestArticle,
-    Dragable,
-    PropsInject,
-    TestForm,
-    TestTable
-
-}, (Children, ctx)=>{
-    const caption = ctx.key.replace(/([A-Z])/g, ' $1').trim();
-    return {
-        path:"/"+String.jet.camelCase(caption.toLowerCase()),
-        caption,
-        content:<Block caption={caption} children={<Children/>}/>
-    }
-});
-
-
-const Router = createRouter(pages);
-
-window.Router = Router;
-
+import { Router } from "./Router.js";
 
 export default _=>{
     return (

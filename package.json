@@ -9,6 +9,7 @@
   "exports": {
     ".": "./dist/index.js",
     "./base/page": "./dist/base/page.js",
+    "./base/tab":"./dist/base/tab.js",
     "./base/screen": "./dist/base/screen.js",
     "./base/store": "./dist/base/store.js",
     "./dom/router": "./dist/dom/Router/Router.js",

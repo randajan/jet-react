@@ -45,4 +45,5 @@ class Screen extends BaseSync {
 
 }
 
-export default new Screen();
+export const screen = new Screen();
+export default screen;

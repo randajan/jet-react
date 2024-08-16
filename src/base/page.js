@@ -30,7 +30,7 @@ class Page extends BaseSync {
             base.fit("hash", (next, v)=>next(setFrom ? loc.hash : v));
             
             base.fit((next, v)=>{
-                v = Object.jet.to(next(Object.jet.tap(v)));
+                v = Object.jet.tap(v);
 
                 v.protocol = loc.protocol;
                 v.hostname = loc.hostname;
@@ -43,7 +43,6 @@ class Page extends BaseSync {
                 const search = buildQuery(v.search);
                 const hash = buildQuery(v.hash);
     
-                v.title = String.jet.to(v.title);
                 v.pathname = String.jet.to(v.pathname);
                 if (!v.pathname.startsWith("/")) { v.pathname = "/" + v.pathname; }
                 
@@ -52,8 +51,6 @@ class Page extends BaseSync {
     
                 return v;
             });
-    
-            base.watch("title", get=>document.title = get())
     
             base.watch("path", get=>{
                 if (!setTo) {
@@ -84,8 +81,10 @@ class Page extends BaseSync {
     
             setFrom = false;
         });
+
     }
 
 }
 
-export default new Page();
+export const page = new Page();
+export default page;

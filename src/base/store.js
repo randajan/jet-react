@@ -59,4 +59,5 @@ class Store extends BaseSync {
 }
 
 
-export default new Store();
+export const store = new Store();
+export default store;

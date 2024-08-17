@@ -14,7 +14,7 @@ const formatRoute = (route)=>{
 export class Router extends Hub {
     constructor(routes) {
         super(
-            (route, match)=>route.matcher(match),
+            (route, match)=>route.matcher(match).params,
             route=>route.children || route.content || null,
             route=>{
                 const { path, exact, children, content } = route = formatRoute(route);

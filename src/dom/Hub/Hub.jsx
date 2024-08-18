@@ -82,7 +82,7 @@ export class Hub extends Plex {
     const route = this.matchRoute(match);
 
     if (route.uid !== _c.uid) { _c.key++; _c.uid = route.uid; }
-    let content = _p.routeRender(route);
+    let content = _p.routeRender(route, match);
     const ref = useMemo(_=>({current:undefined}), [content]);
 
     if (transition) {

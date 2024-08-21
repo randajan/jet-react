@@ -20,9 +20,11 @@ export class Stateful extends Flagable {
 
   constructor(props) {
     super(props);
+
+    this.effect = new RunPool();
     const propState = this.fetchPropState(props);
     this.state = this.validateState(propState, propState);
-    this.effect = new RunPool();
+
   }
 
   componentDidUpdate(props) {

@@ -128,8 +128,8 @@ export class Field extends Valuable {
     return !force ? num : step ? Number.jet.snap(num, step, min, max) : Number.jet.frame(num, min, max);
   }
 
-  validateState(now, from) {
-    now = super.validateState(now, from);
+  validateState(now, from, effect) {
+    now = super.validateState(now, from, effect);
     const { maxLength } = this.props;
     now.mark = maxLength ? now.input.length / maxLength : 0;
     return now;

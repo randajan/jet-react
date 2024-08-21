@@ -93,12 +93,12 @@ export class Slider extends Valuable {
     return step ? Number.jet.snap(value, step, n, m) : Number.jet.frame(value, n, m);
   }
 
-  validateState(to, from) {
+  validateState(to, from, effect) {
     const { shiftSubmit, onShift } = this.props;
     if (to.shifting) { to.focus = true; }
     if (shiftSubmit && to.shifting === false) { to.output = Number.jet.tap(to.input, from.input); }
-    to = super.validateState(to, from);
-    if (to.shifting != from.shifting) { this.effect.run(_=>jet.run(onShift, to.shifting)); }
+    to = super.validateState(to, from, effect);
+    if (to.shifting != from.shifting) { effect.run(_=>jet.run(onShift, to.shifting)); }
     return to;
   }
 

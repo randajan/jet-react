@@ -11,8 +11,8 @@ export const TestField = (props)=>{
 
   return (
     <div className="TestField">
-      <Field onInput={field=>{
-        console.log("eyeOnInput", field.state.input);
+      <Field onOutput={field=>{
+        console.log("eyeOnOutput", field.getOutput());
       }}/>
     </div>
   );

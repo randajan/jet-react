@@ -52,7 +52,7 @@ export class Valuable extends Focusable {
 
   submit() { this.setRawput(this.state.output); return true; }
   reject() { this.setOutput(this.state.rawput); return true; }
-  undo() { this.setInput(this.state.output); return true; }
+  undo() { this.setState({focus:false, input:this.state.output}); return true; }
 
   blur() { return this.setState({focus:false, output:this.getInput()}); }
 
@@ -64,36 +64,39 @@ export class Valuable extends Focusable {
     return to;
   }
 
-  fitValue(to, from, fit, eye, force=false) {
+  fitValue(to, from, fit, eye, effect, force=false) {
     to = this.validateValue(fit ? fit(to, from) : to, from, force);
-    if (eye && this.isValueDirty(to, from)) { this.effect.add(_=>jet.run(eye, this, to, from)); }
+    if (eye && this.isValueDirty(to, from)) { effect.add(_=>jet.run(eye, this, to, from)); }
     return to;
   }
 
-  validateState(to, from) {
+  validateState(to, from, effect) {
     const { fitInput, fitOutput, onInput, onOutput, onInputDirty, onOutputDirty, skipInput } = this.props;
     
-    to = super.validateState(to, from);
+    to = super.validateState(to, from, effect);
     
     to.rawput = this.validateValue(to.rawput, from.rawput, true);
 
-    if (to.focus) { to.input = this.fitValue(to.input, from.input, fitInput, onInput, false); }
+    if (to.focus) { to.input = this.fitValue(to.input, from.input, fitInput, onInput, effect, false); }
+    
     
     if (this.isValueDirty(from.rawput, to.rawput)) { to.output = to.rawput; }
     else if (skipInput && to.focus) { to.output = to.input; }
 
-    to.output = this.fitValue(to.output, from.output, fitOutput, onOutput, true);
+    to.output = this.fitValue(to.output, from.output, fitOutput, onOutput, effect, true);
     
-    if (!to.focus) { to.input = this.fitValue(to.output, from.input, fitInput, onInput, false); }
+    if (!to.focus) {
+      to.input = this.fitValue(to.output, from.input, fitInput, onInput, effect, false);
+    }
     
     to.outputDirty = this.isValueDirty(to.rawput, to.output);
     to.inputDirty = this.isValueDirty(to.output, to.input);
 
     if (onOutputDirty && to.outputDirty !== from.outputDirty) {
-      this.effect.add(_=>jet.run(onOutputDirty, this, to.outputDirty));
+      effect.add(_=>jet.run(onOutputDirty, this, to.outputDirty));
     }
     if (onInputDirty && to.inputDirty !== from.inputDirty) {
-      this.effect.add(_=>jet.run(onInputDirty, this, to.inputDirty));
+      effect.add(_=>jet.run(onInputDirty, this, to.inputDirty));
     }
 
     return to;

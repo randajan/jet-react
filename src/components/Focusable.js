@@ -54,15 +54,15 @@ export class Focusable extends Stateful {
   lock() { return this.setState({lock:true}); }
   unlock() { return this.setState({lock:false}); }
 
-  validateState(to, from) {
-    to = super.validateState(to, from);
+  validateState(to, from, effect) {
+    to = super.validateState(to, from, effect);
     const { onFocus, onBlur, fitFocus } = this.props;
     
     if (to.lock) { to.focus = false; }
     else if (fitFocus) { to.focus = Boolean.jet.to(fitFocus(to.focus, from.focus)); }
 
     const watcher = to.focus ? onFocus : onBlur;
-    if (watcher && to.focus !== from.focus) { this.effect.add(_=>jet.run(watcher, this, to.focus)); }
+    if (watcher && to.focus !== from.focus) { effect.add(_=>jet.run(watcher, this, to.focus)); }
 
     return to;
   }

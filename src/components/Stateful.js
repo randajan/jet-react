@@ -21,10 +21,8 @@ export class Stateful extends Flagable {
   constructor(props) {
     super(props);
 
-    this.effect = new RunPool();
     const propState = this.fetchPropState(props);
-    this.state = this.validateState(propState, propState);
-
+    this.state = this.validateState(propState, propState, new Set());
   }
 
   componentDidUpdate(props) {
@@ -52,16 +50,15 @@ export class Stateful extends Flagable {
   }
 
   setState(state) {
-    this.effect.flush();
     const { onChange } = this.props;
     const from = Object.jet.tap(this.state);
-    const to = this.validateState(state, from);
+    const effect = new Set();
+    const to = this.validateState(state, from, effect);
     const changes = jet.compare(from, to, true);
     if (changes.length) {
       super.setState(to, _=>{
         jet.run(onChange, this, changes);
-        this.effect.run();
-        this.effect.flush();
+        jet.run(effect);
       });
     }
     return changes;

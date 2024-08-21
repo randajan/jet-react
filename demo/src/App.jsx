@@ -21,7 +21,7 @@ import { Router } from "./Router.js";
 
 export default _=>{
     return (
-        <Modal className="App" data-flags={ReactComponent.jet.flags(_=>_, "a")}>
+        <Modal className="App" data-flags={ReactComponent.jet.flags(_=>_, "a")} closeOnBlur>
             <div className="Hull">
                 <Block className="header">
                     <Menu trigger="MENU" position="top-left">

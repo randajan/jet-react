@@ -99,9 +99,11 @@ export class Modal extends Block {
     }
 
     fetchPropsCover() {
+        const blur = ({target})=>this.ctrl.getTop()?.blur(target);
         return {
             className:cn("cover"),
-            onClick:({target})=>{ if (target) { this.ctrl.getTop()?.blur(target); } }
+            onMouseDown:blur,
+            onTouchStart:blur
         }
     }
 

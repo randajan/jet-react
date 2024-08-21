@@ -17,6 +17,7 @@ import { TestTable } from "./tests/TestTable/TestTable.jsx";
 
 import "../../dist/dom/Menu/Menu.css";
 import { TestField } from "./tests/TestField/TestField.jsx";
+import { TestPops } from "./tests/TestPops/TestPops.jsx";
 
 const pages = list({
     TestArticle,
@@ -24,7 +25,8 @@ const pages = list({
     PropsInject,
     TestForm,
     TestTable,
-    TestField
+    TestField,
+    TestPops
 }, (Children, ctx)=>{
     const caption = ctx.key.replace(/([A-Z])/g, ' $1').trim();
     return {

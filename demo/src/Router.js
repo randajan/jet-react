@@ -16,14 +16,15 @@ import { TestArticle } from "./tests/TestArticle/TestArticle.jsx";
 import { TestTable } from "./tests/TestTable/TestTable.jsx";
 
 import "../../dist/dom/Menu/Menu.css";
+import { TestField } from "./tests/TestField/TestField.jsx";
 
 const pages = list({
     TestArticle,
     Dragable,
     PropsInject,
     TestForm,
-    TestTable
-
+    TestTable,
+    TestField
 }, (Children, ctx)=>{
     const caption = ctx.key.replace(/([A-Z])/g, ' $1').trim();
     return {

@@ -98,7 +98,7 @@ export class Slider extends Valuable {
     if (to.shifting) { to.focus = true; }
     if (shiftSubmit && to.shifting === false) { to.output = Number.jet.tap(to.input, from.input); }
     to = super.validateState(to, from, effect);
-    if (to.shifting != from.shifting) { effect.run(_=>jet.run(onShift, to.shifting)); }
+    if (to.shifting != from.shifting) { effect.add(_=>jet.run(onShift, this, to.shifting)); }
     return to;
   }
 

@@ -1,22 +1,20 @@
 import { useState, useEffect, useCallback } from "react";
 import jet from "../index";
 
-export const usePromise = (init, pull, deps=[])=>{
-    const [[status, data], set] = useState(["init", init]);
+export const usePromise = (init, execute, deps)=>{
+    if (!(deps instanceof Array)) { deps = undefined; }
+    const [[status, value, error], set] = useState(["init", init]);
 
-    const refresh = async _ => {
-        if (!jet.isRunnable(pull)) {
-            if (status !== "init") { set(["init", init]); }
-            return;
-        }
-        set(["loading", data]); //keep last data while loading
-        try { set(["done", await pull()]); } //set new data
-        catch(err) { set(["error", data]); } //keep last data after error
+    const run = async (...args)=> {
+        set(["loading", value]); //keep last value while loading
+        
+        try { set(["done", await (jet.isRunnable(execute) ? execute(...args) : execute)]); }//set new value
+        catch(err) { set(["error", value, error]); } //keep last value after error
     }
 
-    useEffect(_=>{ refresh() }, deps||[]);
+    useEffect(_=>{ if (deps) { run(); } }, deps || []);
 
-    return [data, status, refresh];
+    return { status, value, error, run }
 }
 
 

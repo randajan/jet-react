@@ -22,7 +22,7 @@ const Svg = (props)=>{
     const { alt, src } = props;
     const body = useRef();
 
-    const [ svg, status ] = usePromise(null, async _=>_cache[src] || (_cache[src] = fetchSVG(src)), [src]);
+    const { value:svg, status } = usePromise(null, async _=>_cache[src] || (_cache[src] = fetchSVG(src)), [src]);
     
     useEffect(_=>{ if (body.current && svg != null) { body.current.innerHTML = svg; } }, [svg, body?.current]);
     

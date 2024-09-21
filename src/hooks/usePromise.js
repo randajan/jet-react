@@ -3,18 +3,24 @@ import jet from "../index";
 
 export const usePromise = (init, execute, deps)=>{
     if (!(deps instanceof Array)) { deps = undefined; }
-    const [[status, value, error], set] = useState(["init", init]);
+    const [[status, result, error], set] = useState(["init", init]);
 
     const run = async (...args)=> {
-        set(["loading", value]); //keep last value while loading
-        
-        try { set(["done", await (jet.isRunnable(execute) ? execute(...args) : execute)]); }//set new value
-        catch(err) { set(["error", value, error]); } //keep last value after error
+        set(["loading", result]); //keep last value while loading
+        try { 
+            const newResult = await (jet.isRunnable(execute) ? execute(...args) : execute);
+            set(["done", newResult]); //set new value
+            return newResult;
+        }
+        catch(err) { 
+            set(["error", result, err]); //keep last value after error
+            throw err;
+        } 
     }
 
     useEffect(_=>{ if (deps) { run(); } }, deps || []);
 
-    return { status, value, error, run }
+    return { status, result, error, run }
 }
 
 

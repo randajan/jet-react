@@ -22,7 +22,7 @@ const _particles = {
 
 export const Article = (props) => {
     const { src, className, overrides, fetch, children, particles } = props;
-    const { value:article, status } = usePromise("", !src ? null : _=>{
+    const { result:article, status } = usePromise("", !src ? null : _=>{
         return jet.isRunnable(fetch) ? fetch(src) : src;
     }, [fetch, src]);
 

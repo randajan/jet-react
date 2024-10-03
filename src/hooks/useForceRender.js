@@ -1,9 +1,10 @@
 import { useStateSafe } from './useStateSafe';
 import jet from "../index";
+import { useCallback } from 'react';
 
 export const useForceRender = _=>{
-  const [state, render] = useStateSafe(0);
-  return _=>render(state+1);
+  const render = useStateSafe()[1];
+  return useCallback(_=>render(Symbol()));
 }
 
 

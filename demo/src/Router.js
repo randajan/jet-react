@@ -19,6 +19,8 @@ import "../../dist/dom/Menu/Menu.css";
 import { TestField } from "./tests/TestField/TestField.jsx";
 import { TestPops } from "./tests/TestPops/TestPops.jsx";
 import { TestUsePromise } from "./tests/TestUsePromise/TestUsePromise.jsx";
+import { TestUseStateSafe } from "./tests/TestUseStateSafe/TestUseStateSafe.jsx";
+import { TestUseForceRender } from "./tests/TestUseForceRender/TestUseForceRender.jsx";
 
 const pages = list({
     TestArticle,
@@ -28,7 +30,9 @@ const pages = list({
     TestTable,
     TestField,
     TestPops,
-    TestUsePromise
+    TestUsePromise,
+    TestUseStateSafe,
+    TestUseForceRender
 }, (Children, ctx)=>{
     const caption = ctx.key.replace(/([A-Z])/g, ' $1').trim();
     return {

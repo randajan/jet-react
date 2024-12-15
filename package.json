@@ -72,13 +72,14 @@
   "peerDependencies": {
     "@randajan/jet-base": "^2.3.2",
     "@randajan/jet-core": "^4.1.0",
-    "markdown-to-jsx": "^7.4.7",
-    "path-to-regexp": "^7.1.0",
+    "@randajan/props": "^0.1.2",
+    "markdown-to-jsx": "^7.7.1",
+    "path-to-regexp": "^8.2.0",
     "prop-types": "^15.8.1",
-    "query-string": "^9.1.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "query-string": "^9.1.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-transition-group": "^4.4.5",
-    "sass-embedded": "^1.77.8"
+    "sass-embedded": "^1.83.0"
   }
 }

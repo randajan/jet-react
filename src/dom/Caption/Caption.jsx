@@ -5,8 +5,8 @@ import { Block } from "../Block/Block";
 import { cn } from '../../tools/css';
 
 import "./Captions.scss";
+import { solid } from '@randajan/props';
 
-const { solid } = jet.prop;
 
 const _customProps = ["level"];
 

@@ -5,8 +5,6 @@ import RunPool from "@randajan/jet-core/runpool";
 
 import { Flagable } from "./Flagable";
 
-const { virtual, solid } = jet.prop;
-
 export class Stateful extends Flagable {
 
   static customProps = [

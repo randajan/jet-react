@@ -2,6 +2,7 @@ import React, { Component, useContext } from 'react';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import PropTypes from 'prop-types';
 import jet from "../../../index";
+import { solid } from '@randajan/props';
 
 
 import { cn } from "../../../tools/css";
@@ -12,7 +13,8 @@ import { Block } from '../../Block/Block';
 
 import "./Modal.scss";
 
-const { solid } = jet.prop;
+
+
 const context = React.createContext();
 
 const onDomUpdate = callback=>{ setTimeout(window.requestAnimationFrame(callback)); }

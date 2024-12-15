@@ -1,8 +1,7 @@
 import React from "react";
 import jet from "@randajan/jet-core";
 import RunPool from "@randajan/jet-core/runpool";
-
-const { solid, virtual } = jet.prop;
+import { solid, solids, virtual } from "@randajan/props";
 
 const fetchProps = props => (String.jet.is(props) || React.isValidElement(props)) ? { children: props } : Object.jet.tap(props);
 
@@ -18,7 +17,7 @@ export class PopController {
       (...a)=>{ if (props[key] !== state[key]) { jet.run(state[key], ...a);} }
     ).with(this);
 
-    solid.all(this, {
+    solids(this, {
       modal,
       key,
       onChange: createRunPool("onChange"),

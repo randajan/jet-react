@@ -38,7 +38,8 @@ slib(
                 "./dom/Menu/Menu.jsx",
                 "./dom/Trigger/Trigger.jsx",
                 "./dom/Pane/Pane.jsx",
-                "./dom/Form/index.js"
+                "./dom/Form/index.js",
+                "./dom/Counter/Counter.jsx"
             ],
         },
         demo:{

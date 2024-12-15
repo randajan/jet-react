@@ -5,8 +5,7 @@ import jet from "@randajan/jet-core";
 import RunPool from "@randajan/jet-core/runpool";
 
 import { cn } from "../tools/css";
-
-const { solid } = jet.prop;
+import { solid } from '@randajan/props';
 
 export class Flagable extends Component {
 

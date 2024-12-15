@@ -5,8 +5,9 @@ import "./Pop.scss";
 
 import { cn } from '../../../tools/css';
 import { Block } from '../../Block/Block';
+import { solid } from '@randajan/props';
 
-const { solid } = jet.prop;
+
 
 export class Pop extends Block {
 

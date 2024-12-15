@@ -1,6 +1,6 @@
 import jet from "@randajan/jet-core";
+import { cached, virtuals } from "@randajan/props";
 
-const { cached, virtual } = jet.prop;
 
 const _cnTransitions = ["appear", "appearActive", "appearDone", "enter", "enterActive", "enterDone", "exit", "exitActive", "exitDone"];
 const _cache = {};
@@ -22,4 +22,4 @@ export const cssTranslate = translator=>{
     if (jet.isRunnable(translator)) { _translator = translator; }
 }
 
-cached(cn, {}, "transitions", _=>virtual.all({}, Object.fromEntries(_cnTransitions.map(n=>[n, _=>cn(n)]))));
+cached(cn, {}, "transitions", _=>virtuals({}, Object.fromEntries(_cnTransitions.map(n=>[n, _=>cn(n)]))));

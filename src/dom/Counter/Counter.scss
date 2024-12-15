@@ -1,0 +1,21 @@
+.Counter {
+    display:inline-flex;
+
+    .Digit {
+        position:relative;
+        overflow:hidden;
+        justify-content:center;
+        align-items:center;
+
+        .dummy {
+            visibility:hidden;
+        }
+
+        .drum {
+            position:absolute;
+            top:0%;
+        }
+    }
+}
+
+

@@ -21,6 +21,7 @@ import { TestPops } from "./tests/TestPops/TestPops.jsx";
 import { TestUsePromise } from "./tests/TestUsePromise/TestUsePromise.jsx";
 import { TestUseStateSafe } from "./tests/TestUseStateSafe/TestUseStateSafe.jsx";
 import { TestUseForceRender } from "./tests/TestUseForceRender/TestUseForceRender.jsx";
+import { TestCounter } from "./tests/TestCounter/TestCounter.jsx";
 
 const pages = list({
     TestArticle,
@@ -32,7 +33,8 @@ const pages = list({
     TestPops,
     TestUsePromise,
     TestUseStateSafe,
-    TestUseForceRender
+    TestUseForceRender,
+    TestCounter
 }, (Children, ctx)=>{
     const caption = ctx.key.replace(/([A-Z])/g, ' $1').trim();
     return {

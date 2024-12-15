@@ -4,18 +4,18 @@ import jet from "@randajan/jet-core";
 import Pool from '@randajan/jet-core/pool';
 import RunPool from '@randajan/jet-core/runpool';
 import { PopController } from "./PopController";
+import { solids } from "@randajan/props";
 
-const { solid } = jet.prop;
 
 export class ModalController {
 
     constructor() {
 
-        solid.all(this, {
+        solids(this, {
             onChange: new RunPool().with(this),
             onUp: new RunPool().with(this),
             onDown: new RunPool().with(this),
-            pops: solid.all({}, {
+            pops: solids({}, {
                 all: new Pool().autoFilter(v=>v instanceof PopController),
                 up: new Pool().autoFilter(v=>v instanceof PopController)
             })

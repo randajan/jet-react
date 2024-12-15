@@ -1,7 +1,6 @@
 import jet from "@randajan/jet-core";
 import { BaseSync } from "@randajan/jet-base";
-
-const { virtual } = jet.prop;
+import { virtual } from "@randajan/props";
 
 const _cc = "$$cookiesConsent";
 

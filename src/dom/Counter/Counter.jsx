@@ -5,12 +5,13 @@ import { cn } from '../../tools/css.js';
 import { Dynamic } from '../../tools/Dynamic.js';
 
 export const Digit = (props)=>{
-  const { id, duration, order, number } = props;
+  const { duration, order, number } = props;
   const ref = useRef();
 
   const [ dyn, setDyn ] = useState();
 
-  const to = Math.floor(number/Math.pow(10, order))/10;
+  const isDot = order == 0;
+  const to = isDot ? 0 : Math.floor(number/Math.pow(10, order>0 ? order-1 : order))/10;
 
   useEffect(_=>{
     if (!ref.current) { return; }
@@ -22,10 +23,10 @@ export const Digit = (props)=>{
   }, [dyn, to]);
 
   return (
-    <div className="Digit" title={id}>
+    <div className="Digit">
       <div className="dummy">0</div>
       <div className="drum" ref={ref}>
-        <div>0</div>
+        <div>{isDot ? "," : "0"}</div>
         <div>1</div>
         <div>2</div>
         <div>3</div>
@@ -45,18 +46,20 @@ export const Digit = (props)=>{
 export const Counter = (props)=>{
   const { id, title, className, children, duration=5000 } = props;
   const number = Number.jet.to(children);
-  const digits = String(number).split("");
+  const serial = String(number);
+  let dotpos = serial.indexOf(".");
+  if (dotpos < 0) { dotpos = serial.length; }
+
+  const digits = [];
+  for (let n = 0; n<serial.length; n++) {
+    const order = dotpos-n;
+    digits.push(<Digit {...{ key:order, duration, number, order }}/>)
+  }
 
   const selfProps = {
     id, title,
     className:cn("Counter", className),
-    children:digits.map((digit, key)=>{
-      const id = Number(key);
-      return <Digit {...{
-        key, id, duration, number,
-        order:digits.length-id-1,
-      }}/>
-    })
+    children:digits
   }
 
   return (

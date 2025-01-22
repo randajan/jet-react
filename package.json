@@ -1,6 +1,6 @@
 {
   "name": "@randajan/jet-react",
-  "version": "2.7.0",
+  "version": "2.7.1",
   "description": "Tools for quick webdev with react",
   "repository": "randajan/jet-react",
   "type": "module",
@@ -39,7 +39,7 @@
     "./dom/form": "./dist/dom/Form/index.js",
     "./dom/form/css": "./dist/dom/Form/index.css",
     "./dom/counter": "./dist/dom/Counter/Counter.js",
-    "./dom/counter/css":"./dist/dom/Counter/Counter.css"
+    "./dom/counter/css": "./dist/dom/Counter/Counter.css"
   },
   "scripts": {
     "start": "set NODE_ENV=dev&& node ./index.js",

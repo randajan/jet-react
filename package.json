@@ -37,7 +37,9 @@
     "./dom/menu": "./dist/dom/Menu/Menu.js",
     "./dom/menu/css": "./dist/dom/Menu/Menu.css",
     "./dom/form": "./dist/dom/Form/index.js",
-    "./dom/form/css": "./dist/dom/Form/index.css"
+    "./dom/form/css": "./dist/dom/Form/index.css",
+    "./dom/counter": "./dist/dom/Counter/Counter.js",
+    "./dom/counter/css":"./dist/dom/Counter/Counter.css"
   },
   "scripts": {
     "start": "set NODE_ENV=dev&& node ./index.js",

@@ -13,7 +13,7 @@ const _rgSvg = /<svg[^>]*>[\s\S]*<\/svg>/;
 const _cache = {};
 
 const fetchSVG = async src=>{
-    const resp = await fetch(src);
+    const resp = await fetch(src, { mode: 'no-cors'});
     const data = await resp.text();
     if (typeof data === "string" && _rgSvg.test(data)) { return data; }
 }
@@ -31,18 +31,18 @@ const Svg = (props)=>{
 
 
 export const Img = (props)=>{
-    const { src, alt } = props;
+    const { src, alt, noSVG, noFetch } = props;
     
     const pass = Component.jet.buildProps(props, {
         className:cn("Img", props.className),
         title:String.jet.only(props.title, alt)
-    }, ["noSVG"]);
+    }, ["noSVG", "noFetch"]);
 
-    if (!props.noSVG) {
+    if (!noFetch) {
         const origin = page.get("origin");
         const url = new URL(src, origin);
         const ext = (url?.pathname?.match(_rgExt) || [])[0];
-        if (ext === ".svg") { return <Svg {...pass}/>; }
+        if (ext === ".svg" && !noSVG) { return <Svg {...pass}/>; }
     }
 
     return <img {...pass}/>;

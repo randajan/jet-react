@@ -39,6 +39,7 @@ export class Modal extends Block {
 
     static defaultProps = {
         ...Block.defaultProps,
+        tagName:"section",
         closeButton: "✖",
         closeOnBlur:false,
         transition: 800

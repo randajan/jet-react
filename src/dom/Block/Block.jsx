@@ -17,11 +17,12 @@ export class Block extends Flagable {
   
   static customProps = [
       ...Flagable.customProps,
-      "children", "caption", "level"
+      "children", "caption", "level", "tagName"
   ];
 
   static defaultProps = {
     ...Flagable.defaultProps,
+    tagName:"div",
     level:1
   }
 
@@ -37,15 +38,15 @@ export class Block extends Flagable {
   }
 
   render() {
-    const { level } = this.props;
+    const { level, tagName } = this.props;
+
+    const content = React.createElement(tagName, this.fetchProps(), this.fetchChildren());
 
     return (
       <context.Consumer>
         {lvl=>(
           <context.Provider value={lvl == null ? 0 : lvl+level}>
-            <div {...this.fetchProps()}>
-              { this.fetchChildren() }
-            </div>
+            {content}
           </context.Provider>
         )}
       </context.Consumer>
@@ -53,5 +54,11 @@ export class Block extends Flagable {
   }
 }
 
+Block.div = props=><Block {...props} tagName={"div"}/>
+Block.main = props=><Block {...props} tagName={"main"}/>
+Block.section = props=><Block {...props} tagName={"section"}/>
+Block.header = props=><Block {...props} tagName={"header"}/>
+Block.footer = props=><Block {...props} tagName={"footer"}/>
+Block.article = props=><Block {...props} tagName={"article"}/>
 
 export default Block;

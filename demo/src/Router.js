@@ -22,6 +22,7 @@ import { TestUsePromise } from "./tests/TestUsePromise/TestUsePromise.jsx";
 import { TestUseStateSafe } from "./tests/TestUseStateSafe/TestUseStateSafe.jsx";
 import { TestUseForceRender } from "./tests/TestUseForceRender/TestUseForceRender.jsx";
 import { TestCounter } from "./tests/TestCounter/TestCounter.jsx";
+import { TestUseRoute } from "./tests/TestUseRoute/TestUseRoute.jsx";
 
 const pages = list({
     TestArticle,
@@ -34,7 +35,8 @@ const pages = list({
     TestUsePromise,
     TestUseStateSafe,
     TestUseForceRender,
-    TestCounter
+    TestCounter,
+    TestUseRoute
 }, (Children, ctx)=>{
     const caption = ctx.key.replace(/([A-Z])/g, ' $1').trim();
     return {

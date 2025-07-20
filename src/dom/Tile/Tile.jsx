@@ -10,10 +10,10 @@ import { cn } from '../../tools/css';
 
 
 export const Tile = (props)=>{
-    const { src, caption, children, className } = props
+    const { src, caption, children, className, tagName } = props
   
     return (
-      <Block {...props} src={null} caption={null} className={cn("Tile", className)}>
+      <Block {...props} src={null} caption={null} className={cn("Tile", className)} tagName={tagName}>
         <Img src={src}/>
         <Caption>{caption}</Caption>
         {children}

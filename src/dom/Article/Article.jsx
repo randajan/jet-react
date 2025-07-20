@@ -53,7 +53,7 @@ export const Article = (props) => {
         "data-status":status
     }
 
-    return <Block {...Component.jet.buildProps(props, pass, ["src", "fetch", "particles", "overrides"])}/>;
+    return <Block.article {...Component.jet.buildProps(props, pass, ["src", "fetch", "particles", "overrides"])}/>;
 }
 
 

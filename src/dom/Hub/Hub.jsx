@@ -82,20 +82,20 @@ export class Hub extends Plex {
     const route = this.matchRoute(match);
 
     if (route.uid !== _c.uid) { _c.key++; _c.uid = route.uid; }
-    let content = _p.routeRender(route, match);
+    const content = <_p.context.Provider value={route} children={_p.routeRender(route, match)} />;
+    
+    if (!transition) { return content; }
+
     const ref = useMemo(_=>({current:undefined}), [content]);
 
-    if (transition) {
-      content = (
-        <TransitionGroup {...Object.jet.exclude(props, ["transition", "transitionPrefix", "match"])}>
-          <CSSTransition nodeRef={ref} key={_c.key} classNames={transitionPrefix} timeout={transition} appear >
-            {<div ref={ref}>{content || null}</div>}
-          </CSSTransition>
-        </TransitionGroup>
-      )
-    }
-
-    return <_p.context.Provider value={route} children={content} />;
+    return (
+      <TransitionGroup {...Object.jet.exclude(props, ["transition", "transitionPrefix", "match"])}>
+        <CSSTransition nodeRef={ref} key={_c.key} classNames={transitionPrefix} timeout={transition} appear >
+          {<div ref={ref}>{content}</div>}
+        </CSSTransition>
+      </TransitionGroup>
+    );
+    
   }
 
 }

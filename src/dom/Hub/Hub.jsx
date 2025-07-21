@@ -10,13 +10,19 @@ const _privates = new WeakMap();
 const setCurrent = ()=>({key:0});
 
 export class Hub extends Plex {
-  constructor(routeMatch, routeRender, routeFormat) {
+  constructor({
+    routeMatch,
+    routeRender,
+    routeFormat,
+    routeTransition
+  }) {
     super(props => this.Provider(props));
 
     const _p = {
       routeMatch,
       routeRender,
       routeFormat,
+      routeTransition,
       routes: [],
       context: createContext({ params: {} }),
     }
@@ -37,8 +43,8 @@ export class Hub extends Plex {
     for (const route of routes) {
       if (Array.isArray(route)) { this.addRoutes(route); continue; }
       const formatedRoute = _p.routeFormat ? _p.routeFormat(route) : route;
-      if (!formatedRoute) { continue; }
-      formatedRoute.uid = _p.routes.push(formatedRoute);
+      if (!formatedRoute) { return; }
+      formatedRoute.key = _p.routes.push(formatedRoute);
     }
 
     return this;
@@ -61,8 +67,7 @@ export class Hub extends Plex {
       break;
     }
 
-    const params = matchedParams || {};
-    return matchedRoute ? {...matchedRoute, params} : {params};
+    if (matchedRoute) { return {...matchedRoute, match, params:matchedParams||{}}; }
   }
 
   useRoute() {
@@ -70,28 +75,29 @@ export class Hub extends Plex {
   }
 
   useParams() {
-    return this.useRoute().params;
+    return this.useRoute()?.params;
   }
 
   Provider(props) {
     const _p = _privates.get(this);
-    const _c = useMemo(setCurrent, []);
-
     const { transition, transitionPrefix, match } = props;
 
     const route = this.matchRoute(match);
-
-    if (route.uid !== _c.uid) { _c.key++; _c.uid = route.uid; }
     const content = <_p.context.Provider value={route} children={_p.routeRender(route, match)} />;
     
     if (!transition) { return content; }
 
+    const _c = useMemo(setCurrent, []);
     const ref = useMemo(_=>({current:undefined}), [content]);
+
+    const trs = _p.routeTransition(route, _c.route);
+    if (trs) { _c.key++; }
+    if (route !== _c.route) { _c.route = route; }
 
     return (
       <TransitionGroup {...Object.jet.exclude(props, ["transition", "transitionPrefix", "match"])}>
         <CSSTransition nodeRef={ref} key={_c.key} classNames={transitionPrefix} timeout={transition} appear >
-          {<div ref={ref}>{content}</div>}
+          {<div ref={ref} data-transition={trs}>{content}</div>}
         </CSSTransition>
       </TransitionGroup>
     );

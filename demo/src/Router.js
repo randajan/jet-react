@@ -65,7 +65,7 @@ tab.fit((next, v)=>{
     v = Object.jet.tap(v);
 
     const route = Router.matchRoute(page.get("pathname"));
-    v.title = route.caption || "Home";
+    v.title = route?.caption || "Home";
 
     if (v.visible) { v.title = "😊 " + v.title; }
     else { v.title = "😴" + "z".repeat(cnt) + " " + v.title; }

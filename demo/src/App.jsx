@@ -24,7 +24,7 @@ export default _=>{
         <Modal className="App" data-flags={ReactComponent.jet.flags(_=>_, "a")} closeOnBlur>
             <div className="Hull">
                 <Block className="header">
-                    <Menu trigger="MENU" position="top-left">
+                    <Menu trigger="MENU" position="right" transition={200}>
                         {Router.mapRoutes((page, key)=><div key={key}><Link to={page.path}>{page.caption}</Link></div>)}
                     </Menu>
                 </Block>

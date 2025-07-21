@@ -1,10 +1,8 @@
 import React from 'react';
-import { CSSTransition } from "react-transition-group";
 import PropTypes from 'prop-types';
 import jet from "../../index";
 
 import { Flagable } from "../../components/Flagable";
-import { cn } from '../../tools/css';
 
 import "./Trigger.scss";
 
@@ -20,7 +18,7 @@ export class Trigger extends Flagable {
 
   static customProps = [
     ...Flagable.customProps,
-    "onTap", "lock", "active", "switch", "transition"
+    "onTap", "lock", "active", "switch"
   ];
 
   static defaultFlags = {
@@ -49,14 +47,8 @@ export class Trigger extends Flagable {
     };
   }
 
-  fetchTransitionProps() {
-    const { transition, appear, active } = this.props;
-    return { in: active, timeout: transition, appear, classNames: cn.transitions }
-  }
-
   render() {
-    const body = <div {...this.fetchProps()} />;
-    return this.props.transition ? <CSSTransition {...this.fetchTransitionProps()} children={body} /> : body;
+    return <div {...this.fetchProps()} />;
   }
 }
 

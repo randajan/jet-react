@@ -4,126 +4,142 @@ import jet from "../../index";
 
 import { CSSTransition } from "react-transition-group";
 
-import { Stateful } from "../../components/Stateful";
 import { cn } from '../../tools/css';
 
 import "./Pane.scss";
+import { Flagable } from '../../components/Flagable';
 
 
-export class Pane extends Stateful {
+const _sides = {
+    "left": "width",
+    "top": "height",
+    "right": "width",
+    "bottom": "height",
+}
 
-  static className = "Pane";
 
-  static customProps = [
-      ...Stateful.customProps,
-      "position", "expand", "transition", "unmountOnExit", "transition"
-  ];
+const paneReveal = (el, reset) => {
+    if (!el) { return; }
+    const s = el.style;
+    if (reset) { s.display = null; }
+    s.marginLeft = s.marginTop = s.marginRight = s.marginBottom = null;
+}
 
-  static propTypes = {
-    ...Stateful.propTypes,
-    position:PropTypes.oneOf(["top", "bottom", "left", "right", "top-left", "top-right", "bottom-left", "bottom-right"]),
-  }
-
-  static defaultProps = {
-    ...Stateful.defaultProps,
-    position: "top"
-  }
-
-  static defaultFlags = {
-    ...Stateful.defaultFlags,
-    position:p=>p.props.position,
-    expand:p=>p.props.expand,
-  }
-
-  static prebound = {
-    width:"-100vw",
-    height:"-100vw"
-  }
-
-  prebound = null;
-
-  getBound() {
-    const { width, height } = Element.jet.bound(this.content);
-    return {
-      width:-width+"px",
-      height:-height+"px"
+const paneClose = (el, position) => {
+    if (!el) { return; }
+    const s = el.style;
+    const b = Element.jet.bound(el);
+    const pos = position.split("-");
+    for (const p of pos) {
+        s[`margin-${p}`] = `${-b[_sides[p]]}px`;
     }
-  }
+}
 
-  afterRender() {
-    const { content, props:{ expand } } = this;
-    const bound = this.getBound();
-
-    if (!expand) { this.prebound = null; }
-    else if (!this.prebound) {
-      this.prebound = bound;
-      return this.forceUpdate();
+const paneHide = (el, position) => {
+    if (!el) { return; }
+    const s = el.style;
+    s.display = "none";
+    const pos = position.split("-");
+    for (const p of pos) {
+        s[`margin-${p}`] = null;
     }
+}
 
-    if (content) {
-      this.forEachPosition((pos, axis)=>
-        content.style["margin-"+pos] = expand ? null : bound[axis]
-      );
-    }
+const parseTrs = trs => {
+    if (typeof trs === "object") { return trs; }
+    return { appear: trs, enter: trs, exit: trs }
+}
 
-  }
+export class Pane extends Flagable {
 
-  forEachPosition(callback) {
-    this.props.position.split("-").map(pos=>{
-      callback(pos, (pos === "top" || pos === "bottom") ? "height" : "width");
-    });
-  }
+    static className = "Pane";
 
-  fetchPropsTransition() {
-    const { expand, transition, unmountOnExit } = this.props;
-    return {
-      ref:transition=>this.transition=transition,
-      in:expand,
-      timeout:transition,
-      unmountOnExit,
-      appear:true,
-      classNames:cn.transitions,
-      children:this.renderBody()
-    }
-  }
+    static customProps = [
+        ...Flagable.customProps,
+        "position", "expand", "transition", "keepMounted", "appear"
+    ];
 
-  fetchPropsContent() {
-    const { children, expand } = this.props;
-    const style = {};
+    static propTypes = {
+        ...Flagable.propTypes,
+        position: PropTypes.oneOf(["top", "bottom", "left", "right", "top-left", "top-right", "bottom-left", "bottom-right"]),
+        keepMounted: PropTypes.bool,
+        expand:PropTypes.bool,
+        appear:PropTypes.bool
 
-    if (expand) {
-      const bound = (this.prebound || Pane.prebound);
-      this.forEachPosition((pos, axis)=>
-        style["margin"+String.jet.capitalize(pos)] = bound[axis]
-      );
     }
 
-    return {
-      ref:el=>this.content=el,
-      className:cn("content"),
-      style,
-      children
+    static defaultProps = {
+        ...Flagable.defaultProps,
+        position: "top"
     }
-  }
 
-  renderBody() {
-    const { transition, expand } = this.props;
-    if (!transition && !expand) { return null; }
-    return (
-      <div {...this.fetchProps(transition?.appliedClasses)}>
-        <div {...this.fetchPropsContent()}/>
-      </div>
-    )
-  }
+    static defaultFlags = {
+        ...Flagable.defaultFlags,
+        position: p => p.props.position,
+        expand: p => p.props.expand,
+    }
 
-  renderTransition() {
-    return <CSSTransition {...this.fetchPropsTransition()}/>
-  }
+    fetchPropsContent() {
+        const { children } = this.props;
 
-  render() {
-    const { transition, expand } = this.props;
-    return (!transition || (expand && !this.prebound)) ? this.renderBody() : this.renderTransition();
-  }
+        return {
+            ref: el => this.content = el,
+            className: cn("content"),
+            children
+        }
+    }
+
+    fetchPropsTransition(children) {
+        const { position, expand, transition, keepMounted, appear } = this.props;
+        const timeout = parseTrs(transition);
+
+        return {
+            nodeRef: { current:this.content },
+            in: expand,
+            timeout,
+            mountOnEnter: true,
+            appear,
+            unmountOnExit:!keepMounted,
+            classNames: cn.transitions,
+            children,
+            onEnter: () => {
+                paneReveal(this.content, true);
+                paneClose(this.content, position);
+            },
+            onEntering: (isAppearing) => {
+                setTimeout(_=>{
+                    const { enter, appear } = timeout;
+                    this.content.style.transition = `margin ${((isAppearing ? appear : enter)-10) / 1000}s`;
+                    paneReveal(this.content);
+                }, 10);
+
+            },
+            onEntered: () => {
+                this.content.style.transition = null;
+            },
+            onExit: () => {
+                paneReveal(this.content);
+            },
+            onExiting: () => {
+                this.content.style.transition = `margin ${timeout.exit / 1000}s`;
+                paneClose(this.content, position);
+            },
+            onExited: () => {
+                this.content.style.transition = null;
+                paneHide(this.content, position);
+            }
+        };
+    }
+
+    render() {
+        const { transition, expand } = this.props;
+        
+        let content = (transition || expand) ? <div {...this.fetchPropsContent()} /> : null;
+
+        if (transition) { content = <CSSTransition {...this.fetchPropsTransition(content)}/>; }
+
+        return <div {...this.fetchProps()}>{content}</div>;
+    }
 
 }
 

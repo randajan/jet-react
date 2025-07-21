@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import "./Counter.scss";
+import css from "./Counter.scss";
 import { cn } from '../../tools/css.js';
 import { Dynamic } from '../../tools/Dynamic.js';
 

@@ -23,8 +23,10 @@ import { TestUseStateSafe } from "./tests/TestUseStateSafe/TestUseStateSafe.jsx"
 import { TestUseForceRender } from "./tests/TestUseForceRender/TestUseForceRender.jsx";
 import { TestCounter } from "./tests/TestCounter/TestCounter.jsx";
 import { TestUseRoute } from "./tests/TestUseRoute/TestUseRoute.jsx";
+import { TestPane } from "./tests/TestPane/TestPane.jsx";
 
 const pages = list({
+    TestPane,
     TestArticle,
     Dragable,
     PropsInject,

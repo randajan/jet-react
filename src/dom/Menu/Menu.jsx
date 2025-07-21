@@ -24,7 +24,7 @@ export class Menu extends Focusable {
 
   static customProps = [
     ...Focusable.customProps,
-    "children", "flat", "noblur", "position", "transition", "trigger", "keepMounted"
+    "children", "flat", "noblur", "position", "transition", "trigger", "keepMounted", "appear",
   ];
 
   static defaultFlags = {
@@ -36,6 +36,7 @@ export class Menu extends Focusable {
 
   static propTypes = {
     ...Focusable.propTypes,
+    appear:PropTypes.bool,
     flat: PropTypes.bool,
     keepMounted: PropTypes.bool
   }
@@ -59,22 +60,22 @@ export class Menu extends Focusable {
   }
 
   fetchTriggerProps() {
-    const { state:{ focus }, props:{ transition, trigger, noblur } } = this;
+    const { state:{ focus }, props:{ trigger, noblur } } = this;
 
     return {
       ref: el => this.trigger = el,
-      switch: noblur, active: focus, transition,
+      switch: true, active: focus,
       children: trigger,
       onTap: this.setFocus
     }
   }
 
   fetchPaneProps() {
-    const { state:{ focus }, props:{ transition, position, children, keepMounted } } = this;
+    const { state:{ focus }, props:{ transition, position, children, keepMounted, appear  } } = this;
 
     return {
       ref: pane => this.pane = pane,
-      unmountOnExit: !keepMounted, expand: focus, position, transition, children,
+      keepMounted, expand: focus, appear, position, transition, children,
     }
   }
 

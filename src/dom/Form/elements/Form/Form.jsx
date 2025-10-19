@@ -30,7 +30,8 @@ export class Form extends Flagable {
   static customProps = [
     ...Flagable.customProps,
     "children", "rawput", "output", "input", "sync", "labels", "titles",
-    "onInput", "onOutput", "onFocus", "onBlur", "onInputDirty", "onOutputDirty"
+    "onInput", "onOutput", "onFocus", "onBlur", "onInputDirty", "onOutputDirty",
+    "onSubmit", "onReject", "onReset", "onUndo"
   ];
 
   static propTypes = {
@@ -38,7 +39,11 @@ export class Form extends Flagable {
     rawput:PropTypes.object,
     output:PropTypes.object,
     input:PropTypes.object,
-    sync:PropTypes.number
+    sync:PropTypes.number,
+    onSubmit:PropTypes.func,
+    onReject:PropTypes.func,
+    onReset:PropTypes.func,
+    onUndo:PropTypes.func,
   }
 
   static defaultProps = {
@@ -99,10 +104,26 @@ export class Form extends Flagable {
   setOutput(output) { return this.mapFields((field, val)=>field.setOutput(val), output); }
   setInput(input) { return this.mapFields((field, val)=>field.setInput(val), input); }
 
-  submit() { return this.mapFields(field=>field.submit()); }
-  reject() { return this.mapFields(field=>field.reject()); }
-  reset() { return this.mapFields(field=>field.reset()); }
-  undo() { return this.mapFields(field=>field.undo()); }
+  submit() {
+    const { onSubmit } = this.props;
+    this.mapFields(field=>field.submit());
+    if (onSubmit) { onSubmit(this); }
+  }
+  reject() {
+    const { onReject } = this.props;
+    this.mapFields(field=>field.reject());
+    if (onReject) { onReject(this); }
+  }
+  reset() {
+    const { onReset } = this.props;
+    this.mapFields(field=>field.reset());
+    if (onReset) { onReset(this); }
+  }
+  undo() {
+    const { onUndo } = this.props;
+    this.mapFields(field=>field.undo());
+    if (onUndo) { onUndo(this); }
+  }
 
   injectEvents(ele, inject) {
     let bubble;

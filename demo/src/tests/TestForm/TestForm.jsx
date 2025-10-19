@@ -18,10 +18,10 @@ export const TestForm = (props)=>{
       rawput={{ fullname:"Adam", age:0, gender:false }}
       output={{ fullname:"Boris", age:30, gender:false }}
       labels={{ fullname:"Name", age:"Age", gender:"Gender", bio:"Bio" }}
-      onSubmit={form=>{ return false; }}
       onOutput={(form)=>{console.log("form_output", form.getOutput())}}
       onInput={(form)=>{console.log("form_input", form.getInput())}}
       onChange={(...args)=>{console.log("form_change", ...args);}}
+      onSubmit={(form)=>{ console.log("SUBMIT"); }}
     >
       <Field input={"Denis"} name="fullname" maxLength={15} onInput={console.log}/>
       <Field input={100} name="agen" type="number" onInput={console.log} focus step={5} min={10} max={150}/>

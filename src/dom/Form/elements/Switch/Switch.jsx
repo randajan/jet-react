@@ -48,9 +48,9 @@ export class Switch extends Range {
     return Math.round(Number.jet.frame(Number.jet.to(to), 0, 1));
   }
 
-  fetchPropsTrack() {
+  fetchProps() {
     return {
-      ...super.fetchPropsTrack(),
+      ...super.fetchProps(),
       onClick:this.handleClick,
     }
   }

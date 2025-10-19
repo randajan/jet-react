@@ -12,7 +12,7 @@ import { cn } from '../../../../tools/css';
 
 export class Range extends Slider {
 
-  static className = "Range";
+  static className = "Range Slider";
 
   static customProps = [
     ...Slider.customProps,

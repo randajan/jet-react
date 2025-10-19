@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import PropTypes from 'prop-types';
 import jet from "../../../../index";
 
@@ -106,14 +106,19 @@ export class Field extends Valuable {
   }
 
   handleKeyDown(ev) {
-    const onKeyDown = this.props.onKeyDown;
+    const { parent, onKeyDown } = this.props;
     const k = ev.keyCode;
     if (this.state.lock) { return ev.preventDefault(); }
     if (onKeyDown && onKeyDown(this, ev) === false) { return; }
     else if (ev.isDefaultPrevented()) { return; }
 
-    if (k === 27) { if (this.getInput() === this.getOutput()) { this.blur() } else { this.undo(); } } //escape 
-    else if (k === 13 && (ev.ctrlKey === this.isTextArea())) { this.blur(); } //not enter
+    if (k === 27) { //escape 
+      if (this.getInput() === this.getOutput()) { this.blur() } else { this.undo(); }
+    } 
+    else if (k === 13 && (ev.ctrlKey === this.isTextArea())) {
+      this.blur();
+      setTimeout(_=>{if (parent) { parent.submit();} }); //TODO!!!
+    } //enter
     else { return; }
 
     ev.preventDefault();
@@ -150,6 +155,11 @@ export class Field extends Valuable {
     };
   }
 
+  fetchProps() {
+    const onClick = ()=>{ this.focus(); }
+    return { ...super.fetchProps(), onClick };
+  }
+
   fetchPropsOnbox() {
     const { rows, cols } = this.props;
     return { ref:el=>this.onbox = el, className:cn("onbox"), rows, cols };
@@ -170,6 +180,7 @@ export class Field extends Valuable {
 
   render() {
     const { type, children } = this.props;
+
     return (
       <div {...this.fetchProps(type)}>
         <div className={cn("wrap")}>

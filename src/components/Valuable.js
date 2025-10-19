@@ -52,7 +52,7 @@ export class Valuable extends Focusable {
 
   submit() { this.setRawput(this.state.output); return true; }
   reject() { this.setOutput(this.state.rawput); return true; }
-  undo() { this.setState({focus:false, input:this.state.output}); return true; }
+  undo() { this.setState({input:this.state.output}); return true; }
 
   blur() { return this.setState({focus:false, output:this.getInput()}); }
 

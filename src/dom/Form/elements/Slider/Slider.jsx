@@ -112,14 +112,17 @@ export class Slider extends Valuable {
   }
 
   handleKeyDown(ev) {
-    const { onKeyDown, step, inverted, vertical, lock, from, to } = this.props;
+    const { parent, onKeyDown, step, inverted, vertical, lock, from, to } = this.props;
     const k = ev.keyCode, inv = (((inverted !== from > to) !== vertical)*2-1);
     if (lock) { return ev?.preventDefault(); }
     if (onKeyDown && onKeyDown(this, ev) === false) { return; }
     else if (ev.isDefaultPrevented()) { return; }
 
     if (k === 27) { if (this.getInput() === this.getOutput()) { this.blur() } else { this.undo(); } } //escape 
-    else if (k === 13) { this.blur(); } //not enter
+    else if (k === 13) {
+      this.blur();
+      setTimeout(_=>{if (parent) { parent.submit();} }); //TODO!!!
+    } //not enter
     else if (k === 37 || k === 40) { this.setInput(this.getInput()+(inv*step)); }
     else if (k === 39 || k === 38) { this.setInput(this.getInput()-(inv*step)); }
     else { return; }

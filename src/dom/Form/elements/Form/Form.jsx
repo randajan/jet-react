@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createContext, useContext } from 'react';
 import PropTypes from 'prop-types';
 import jet from "../../../../index";
 
@@ -57,6 +57,8 @@ export class Form extends Flagable {
     val = (Object.jet.is(val) ? val[key] : jet.isRunnable(val) ? val(key) : val);
     return val !== undefined ? val : def;
   }
+
+  static context = createContext()
 
   fields = {};
   timers = {};
@@ -152,7 +154,11 @@ export class Form extends Flagable {
   }
 
   render() {
-    return <form {...this.fetchProps()}/>
+    return (
+      <Form.context.Provider value={this}>
+        <form {...this.fetchProps()}/>
+      </Form.context.Provider>
+    )
   }
 }
 

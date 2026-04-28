@@ -25,6 +25,7 @@ export const TestForm = (props)=>{
     >
       <Field input={"Denis"} name="fullname" maxLength={15} onInput={console.log}/>
       <Field input={100} name="agen" type="number" onInput={console.log} focus step={5} min={10} max={150}/>
+      <Field name="secret" type="password" hide="x"/>
       <Range input={100} name="ager" step={1} from={0} to={100} marker={<FiveStars/>}/>
       <Switch name="gender" onOutput={(s,v)=>console.log("output", v)} onInput={(s,v)=>console.log("input", v)}/>
       <Field name="bio" maxLength={255} type="textarea" autoSize/>

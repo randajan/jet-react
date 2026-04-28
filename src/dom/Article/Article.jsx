@@ -48,7 +48,7 @@ export const Article = (props) => {
     }
 
     const pass = {
-        className: cn("Article", className, String.jet.camelCase(String.jet.delone(src || ""))),
+        className: cn("Article", className),
         children:compiler(String.jet.to(article) || String.jet.to(children), options),
         "data-status":status
     }

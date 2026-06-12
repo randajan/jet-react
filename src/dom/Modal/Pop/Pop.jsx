@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import jet from "../../../index";
+import React from 'react';
 
 import "./Pop.scss";
 

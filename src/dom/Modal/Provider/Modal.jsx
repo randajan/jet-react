@@ -1,6 +1,5 @@
-import React, { Component, useContext } from 'react';
+import React, { useContext } from 'react';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import PropTypes from 'prop-types';
 import jet from "../../../index";
 import { solid } from '@randajan/props';
 
@@ -93,10 +92,13 @@ export class Modal extends Block {
 
         const transition = state.transition || props.transition;
         const closeButton = state.closeButton || props.closeButton;
+        const sceneRef = pop.sceneRef || solid(pop, "sceneRef", React.createRef()).sceneRef;
 
         return (
-            <CSSTransition key={pop.key} timeout={transition} classNames={cn.transitions} appear>
-                <Pop {...{ closeButton, ...state }} ctrl={pop} />
+            <CSSTransition nodeRef={sceneRef} key={pop.key} timeout={transition} classNames={cn.transitions} appear>
+                <div ref={sceneRef} className={cn("PopScene")}>
+                    <Pop {...{ closeButton, ...state }} ctrl={pop} />
+                </div>
             </CSSTransition>
         )
     }

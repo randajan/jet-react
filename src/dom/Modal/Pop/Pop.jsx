@@ -3,24 +3,24 @@ import React from 'react';
 import "./Pop.scss";
 
 import { cn } from '../../../tools/css';
-import { Block } from '../../Block/Block';
 import { solid } from '@randajan/props';
+import { Flagable } from '../../../components/Flagable';
 
 
 
-export class Pop extends Block {
+export class Pop extends Flagable {
 
   static className = "Pop";
 
   static bindMethods = ["down"];
 
   static customProps = [
-    ...Block.customProps,
+    ...Flagable.customProps,
     "ctrl", "lock", "closeButton", "closeOnBlur", "up", "onUp", "onDown"
   ];
 
   static defaultFlags = {
-    ...Block.defaultFlags,
+    ...Flagable.defaultFlags,
     top: p => p.ctrl.isTop(),
     lock: p => p.ctrl.state.lock
   }
@@ -41,19 +41,19 @@ export class Pop extends Block {
     return this.ctrl.down(ev);
   }
 
-  fetchChildren() {
-    const { lock, closeButton } = this.props;
+  render() {
+    const { children, lock, closeButton } = this.props;
 
     return (
-      <>
+      <div {...this.fetchProps()}>
         <nav className={cn("nav")}>
           <div className={cn("close")} onClick={lock ? null : this.down}>{closeButton}</div>
         </nav>
         <div className={cn("content")}>
-          {super.fetchChildren()}
+          {children}
         </div>
         <div className={cn("mist")} />
-      </>
+      </div>
     )
   }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext } from 'react';
 
 import "./Pop.scss";
 
@@ -25,6 +25,8 @@ export class Pop extends Flagable {
     lock: p => p.ctrl.state.lock
   }
 
+  static context = createContext(undefined);
+
   constructor(props) {
     super(props);
 
@@ -45,15 +47,17 @@ export class Pop extends Flagable {
     const { children, lock, closeButton } = this.props;
 
     return (
-      <div {...this.fetchProps()}>
-        <nav className={cn("nav")}>
-          <div className={cn("close")} onClick={lock ? null : this.down}>{closeButton}</div>
-        </nav>
-        <div className={cn("content")}>
-          {children}
+      <Pop.context.Provider value={this}>
+        <div {...this.fetchProps()}>
+          <nav className={cn("nav")}>
+            <div className={cn("close")} onClick={lock ? null : this.down}>{closeButton}</div>
+          </nav>
+          <div className={cn("content")}>
+            {children}
+          </div>
+          <div className={cn("mist")} />
         </div>
-        <div className={cn("mist")} />
-      </div>
+      </Pop.context.Provider>
     )
   }
 

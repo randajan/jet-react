@@ -4,9 +4,13 @@ import jet from "@randajan/jet-react";
 
 import "./TestPops.scss";
 
-import { usePop } from "../../../../dist/dom/Modal";
+import { usePop, usePopSelf } from "../../../../dist/dom/Modal";
 import "../../../../dist/dom/Modal/index.css";
 
+const Test2 = ()=>{
+  const popAbove = usePopSelf();
+  return <div onClick={_=>popAbove?.down()}>CLOSE ME</div>
+}
 
 export const TestPops = (props)=>{
   const { } = props;
@@ -15,7 +19,7 @@ export const TestPops = (props)=>{
 
   return (
     <div className="TestPops">
-      <a onClick={_=>pop.up(<div onClick={_=>pop2.up(<div>wtf</div>)}>TEST</div>)}>Click me</a>
+      <a onClick={_=>pop.up(<div onClick={_=>pop2.up(<Test2/>)}>TEST</div>)}>Click me</a>
     </div>
   );
 }

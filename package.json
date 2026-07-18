@@ -77,13 +77,13 @@
     "@randajan/jet-base": "^2.3.2",
     "@randajan/jet-core": "^4.1.0",
     "@randajan/props": "^0.1.4",
-    "markdown-to-jsx": "^7.7.12",
-    "path-to-regexp": "^8.2.0",
+    "markdown-to-jsx": "^9.8.2",
+    "path-to-regexp": "^8.4.2",
     "prop-types": "^15.8.1",
-    "query-string": "^9.2.2",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "query-string": "^9.4.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "react-transition-group": "^4.4.5",
-    "sass-embedded": "^1.89.2"
+    "sass-embedded": "^1.100.0"
   }
 }

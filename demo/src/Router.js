@@ -24,10 +24,12 @@ import { TestUseForceRender } from "./tests/TestUseForceRender/TestUseForceRende
 import { TestCounter } from "./tests/TestCounter/TestCounter.jsx";
 import { TestUseRoute } from "./tests/TestUseRoute/TestUseRoute.jsx";
 import { TestPane } from "./tests/TestPane/TestPane.jsx";
+import { TestImg } from "./tests/TestImg/TestImg.jsx";
 
 const pages = list({
     TestPane,
     TestArticle,
+    TestImg,
     Dragable,
     PropsInject,
     TestForm,

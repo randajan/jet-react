@@ -12,40 +12,67 @@ const _rgExt = /\.[^\.\/\\]*$/;
 const _rgSvg = /<svg[^>]*>[\s\S]*<\/svg>/;
 const _cache = {};
 
-const fetchSVG = async src=>{
-    const resp = await fetch(src, { mode: 'no-cors'});
-    const data = await resp.text();
-    if (typeof data === "string" && _rgSvg.test(data)) { return data; }
+const isAllowedSvg = (src, allowCors=false)=>{
+    const origin = page.get("origin");
+    const url = new URL(src, origin);
+
+    if (!allowCors && origin !== url.origin) { return false; }
+
+    const ext = (url?.pathname?.match(_rgExt) || [])[0];
+    return ext === ".svg";
 }
 
+const isSvgStr = (str)=>typeof str === "string" && _rgSvg.test(str);
+const asSvgStr = (str, src)=>{
+    if (isSvgStr(str)) { return str; }
+    throw new Error(`Invalid SVG at '${src}'`);
+}
+
+const fetchSVG = async (src, normalize, allowCors)=>{
+    const resp = await fetch(src, allowCors ? {} : { mode:"no-cors" });
+    const data = await resp.text();
+
+    const pure = await normalize(asSvgStr(data, src)); //PURIFY
+
+    return asSvgStr(pure, src);
+}
+
+const filterProps = (props, exclude=[])=>{
+    return Object.jet.exclude(props, ["forceSvg", "allowCors", "normalizeSvg", ...exclude]);
+}
+
+
 const Svg = (props)=>{
-    const { alt, src } = props;
+    const { src, allowCors, normalizeSvg } = props;
     const body = useRef();
 
-    const { result:svg, status } = usePromise(null, async _=>_cache[src] || (_cache[src] = fetchSVG(src)), [src]);
-    
-    useEffect(_=>{ if (body.current && svg != null) { body.current.innerHTML = svg; } }, [svg, body?.current]);
-    
-    return <span ref={body} {...props} src={null} alt={null} data-status={status}>{svg == null ? alt : null}</span>;
+    const { result:svg, status } = usePromise(null, async _=>{
+        return _cache[src] || (_cache[src] = fetchSVG(src, normalizeSvg, allowCors));
+    }, [src, normalizeSvg, allowCors]);    
+
+    useEffect(_=>{
+        if (body.current) { body.current.innerHTML = svg; }
+    }, [body.current, svg]);
+
+    if (status === "error") { return <img {...filterProps(props)}/>; }
+
+    return <span ref={body} {...filterProps(props, ["src", "alt"])} data-status={status}/>;
 }
 
 
 export const Img = (props)=>{
-    const { src, alt, forceSvg, noSVG, noFetch } = props;
-    
-    const pass = Component.jet.buildProps(props, {
-        className:cn("Img", props.className),
-        title:String.jet.only(props.title, alt)
-    }, ["noSVG", "noFetch"]);
+    const { src, alt, forceSvg, normalizeSvg, allowCors } = props;
 
-    if (!noFetch) {
-        const origin = page.get("origin");
-        const url = new URL(src, origin);
-        const ext = (url?.pathname?.match(_rgExt) || [])[0];
-        if ((ext === ".svg" || forceSvg) && !noSVG) { return <Svg {...pass}/>; }
+    const className = cn("Img", props.className);
+    const title = String.jet.only(props.title, alt);
+
+    const pass = { ...props, className, title };
+
+    if (normalizeSvg && (forceSvg || isAllowedSvg(src, allowCors))) {
+        return <Svg {...pass}/>; 
     }
 
-    return <img {...pass}/>;
+    return <img {...filterProps(props)}/>;
 }
 
 export default Img;

@@ -72,7 +72,7 @@ export const Img = (props)=>{
         return <Svg {...pass}/>; 
     }
 
-    return <img {...filterProps(props)}/>;
+    return <img {...filterProps(pass)}/>;
 }
 
 export default Img;
